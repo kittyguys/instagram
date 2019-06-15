@@ -1,12 +1,23 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: #fafafa;
   min-height: 100vh;
   box-sizing: border-box;
   margin: 0;
+  background: #000;
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
+}
+
+#root {
+  width: 320px;
+  height: 568px;
+  overflow-y: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fafafa;
 }
