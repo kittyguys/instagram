@@ -1,10 +1,10 @@
 var express = require('express');
 const multer = require('multer')
 var router = express.Router();
-const User = require('../models/users')
+const UserModel = require('../db/models/user')
 
 const storage =  multer.diskStorage({
-  destination: './public/images',
+  destination: './public/images/avatars',
   filename: (req, file, cb) => {
     cb(null, file.originalname)
   }
@@ -24,14 +24,14 @@ router.post('/upload', uploader.single('image'), function(req, res, next) {
 
 router.post('/register', function(req, res) {
   const { id, password } = req.body
-  new User({
+  new UserModel({
     id,
     password,
     avater: "",
   }).save(err => {
     if(err) res.status(500).send()
     else {
-      User.find({}, (findErr, userList) => {
+      UserModel.find({}, (findErr, userList) => {
         if(findErr) res.status(500).send()
         else res.status(200).send(userList)
       })
