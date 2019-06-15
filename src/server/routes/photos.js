@@ -39,19 +39,22 @@ router.get("/", (req, res) => {
 
 router.put("/like", (req, res) => {
   const { id, uid } = req.body;
-  PhotoModel.findByIdAndUpdate(
-    id,
-    { like: like.includes(uid) ? like : like.push(uid) },
-    err => {
-      if (err) res.status(500).send();
-      else {
-        PhotoModel.find({}, (findErr, photoList) => {
-          if (findErr) res.status(500).send();
-          else res.status(200).send(photoList);
-        });
-      }
+  let likeTmp = [];
+  PhotoModel.findById(id, (err, photo) => {
+    if (err) res.status(500).send();
+    else {
+      likeTmp = like.includes(uid) ? photo.like : photo.like.push(uid);
+      PhotoModel.findByIdAndUpdate(id, { like: likeTmp }, err => {
+        if (err) res.status(500).send();
+        else {
+          PhotoModel.find({}, (findErr, photoList) => {
+            if (findErr) res.status(500).send();
+            else res.status(200).send(photoList);
+          });
+        }
+      });
     }
-  );
+  });
 });
 
 router.delete("/deletePhoto", (req, res) => {
