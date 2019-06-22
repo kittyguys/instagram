@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Title = styled.h1`
+const TitleItem = styled.h1`
   background-image: url(../images/icons.png);
   background-repeat: no-repeat;
   background-size: 520px auto;
@@ -11,8 +11,8 @@ const Title = styled.h1`
   margin: 22px auto 36px;
 `;
 
-export default class LoginFormTitle extends React.Component {
+export default class Title extends React.Component {
   render() {
-    return <Title />;
+    return <TitleItem />;
   }
 }

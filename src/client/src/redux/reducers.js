@@ -1,17 +1,25 @@
-//import { CHANGE_PHOTOLIST } from "./actions";
-import { combineReducers } from "redux";
-
-const photoListReducer = (state = [], action) => {
+const userReducer = (
+  state = { uid: "", upass: "", isLoggedIn: false, errMessage: false },
+  action
+) => {
   switch (action.type) {
-    case CHANGE_PHOTOLIST:
-      return action.photoList;
+    case "LOGIN":
+      if (action.uid === "a" && action.upass === "b") {
+        return {
+          ...state,
+          uid: action.uid,
+          upass: action.upass,
+          isLoggedIn: true,
+          errMessage: false
+        };
+      }
+      return {
+        ...state,
+        errMessage: true
+      };
     default:
       return state;
   }
 };
 
-const rootReducer = combineReducers({
-  photoList: photoListReducer
-});
-
-export default rootReducer;
+export default userReducer;
