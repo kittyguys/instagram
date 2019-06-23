@@ -1,7 +1,6 @@
 import React from "react";
-import styled from "styled-components";
 import Header from "../../organisms/Header";
-import Footer from "../../organisms/Footer";
+import FooterContainer from "../../organisms/Footer/FooterContainer";
 
 export default class Top extends React.Component {
   render() {
@@ -9,7 +8,7 @@ export default class Top extends React.Component {
       <>
         {/*!this.props.isLoggedIn && this.props.history.push("/login")*/}
         <Header />
-        <Footer />
+        <FooterContainer />
       </>
     );
   }

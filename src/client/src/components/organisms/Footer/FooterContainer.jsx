@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Top from "./";
+import Footer from "./";
 
 const mapStateToProps = state => {
   return {
@@ -17,4 +17,4 @@ export default connect(
   mapStateToProps,
   null
   //mapDispatchToProps
-)(Top);
+)(Footer);
