@@ -21,7 +21,7 @@ router.post("/login", function(req, res, next) {
 });
 
 // idでfind
-router.get("/:id", function(req, res) {
+router.get("/me", function(req, res) {
   const { uid } = req.body;
   UserModel.findById(uid, (err, user) => {
     if (err) res.status(500);
