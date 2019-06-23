@@ -3,6 +3,8 @@ import Top from "./";
 
 const mapStateToProps = state => {
   return {
+    uid: state.uid,
+    upass: state.upass,
     isLoggedIn: state.isLoggedIn
   };
 };
