@@ -1,0 +1,10 @@
+{
+  "Instagram": {
+    "dbConfig": {
+      "host": "localhost",
+      "port": 27017,
+      "dbName": "instagram"
+    },
+    "secret": "instagramcopyapp"
+  }
+}
