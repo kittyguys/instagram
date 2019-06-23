@@ -43,7 +43,7 @@ router.put("/like", (req, res) => {
   PhotoModel.findById(id, (err, photo) => {
     if (err) res.status(500).send();
     else {
-      likeTmp = like.includes(uid) ? photo.like : photo.like.push(uid);
+      likeTmp = photo.like.includes(uid) ? photo.like : photo.like.push(uid);
       PhotoModel.findByIdAndUpdate(id, { like: likeTmp }, err => {
         if (err) res.status(500).send();
         else {
