@@ -1,8 +1,6 @@
 import React from "react";
-import styled from "styled-components";
 import Header from "../../organisms/Header";
-import Footer from "../../organisms/Footer";
-import axios from "axios";
+import FooterContainer from "../../organisms/Footer/FooterContainer";
 
 export default class Top extends React.Component {
   getRequest() {
@@ -21,19 +19,7 @@ export default class Top extends React.Component {
       <>
         {/*!this.props.isLoggedIn && this.props.history.push("/login")*/}
         <Header />
-        <button
-          style={{ position: "relative", zIndex: 100 }}
-          onClick={() => this.getRequest()}
-        >
-          JWT
-        </button>
-        <button
-          style={{ position: "relative", zIndex: 100 }}
-          onClick={() => this.register()}
-        >
-          登録
-        </button>
-        <Footer />
+        <FooterContainer />
       </>
     );
   }

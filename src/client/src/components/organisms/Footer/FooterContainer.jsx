@@ -1,8 +1,10 @@
 import { connect } from "react-redux";
-import Top from "./";
+import Footer from "./";
 
 const mapStateToProps = state => {
   return {
+    uid: state.uid,
+    upass: state.upass,
     isLoggedIn: state.isLoggedIn
   };
 };
@@ -15,4 +17,4 @@ export default connect(
   mapStateToProps,
   null
   //mapDispatchToProps
-)(Top);
+)(Footer);

@@ -1,13 +1,13 @@
-import { login } from "../../../redux/actionCreators";
+import { login } from "../../../redux/actionCreators/login";
 import { connect } from "react-redux";
 import Login from "./";
 
 const mapStateToProps = state => {
   return {
-    uid: state.uid,
-    upass: state.upass,
-    isLoggedIn: state.isLoggedIn,
-    errMessage: state.errMessage
+    uid: state.login.uid,
+    upass: state.login.upass,
+    isLoggedIn: state.login.isLoggedIn,
+    errMessage: state.login.errMessage
   };
 };
 
