@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 const uploader = multer({ storage });
 
 /* GET users listing. */
-router.Post("/upload", uploader.single("image"), function(req, res, next) {
+router.post("/upload", uploader.single("image"), function(req, res, next) {
   const file = req.file;
   const meta = req.body;
   // デッバグのため、アップしたファイルの名前を表示する
