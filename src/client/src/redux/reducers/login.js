@@ -4,18 +4,12 @@ const loginReducer = (
 ) => {
   switch (action.type) {
     case "LOGIN":
-      if (action.uid === "a" && action.upass === "b") {
-        return {
-          ...state,
-          uid: action.uid,
-          upass: action.upass,
-          isLoggedIn: true,
-          errMessage: false
-        };
-      }
       return {
         ...state,
-        errMessage: true
+        uid: action.uid,
+        upass: action.upass,
+        isLoggedIn: true,
+        errMessage: false
       };
     default:
       return state;

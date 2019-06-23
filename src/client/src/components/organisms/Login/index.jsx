@@ -131,7 +131,9 @@ export default class Login extends React.Component {
     super(props);
     this.state = {
       uid: "",
-      upass: ""
+      upass: "",
+      isLoggedIn: false,
+      errMassege: false
     };
     this.changeId = this.changeId.bind(this);
     this.changePass = this.changePass.bind(this);
@@ -145,13 +147,18 @@ export default class Login extends React.Component {
     await new Promise(resolve =>
       axios
         .post(`${process.env.API_PATH}/login`, data)
-        .then(() => {
-          this.props.login(this.state.uid, this.state.upass);
+        .then(response => {
+          if (response.data.id) {
+            this.props.login(response.user.id, this.state.upass);
+            this.setState({ isLoggedIn: true });
+          } else {
+            this.setState({ errMessage: true });
+          }
           resolve();
         })
         .catch(error => {})
     );
-    this.props.isLoggedIn && this.props.history.push("/");
+    this.state.isLoggedIn && this.props.history.push("/");
   }
 
   changeId(e) {
@@ -168,7 +175,7 @@ export default class Login extends React.Component {
         <LoginFormBox>
           <Title />
           <div>
-            {this.props.errMessage && (
+            {this.state.errMessage && (
               <ErrMessage>ログイン認証エラー</ErrMessage>
             )}
             <InputWrap>
