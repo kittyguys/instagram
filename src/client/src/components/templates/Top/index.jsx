@@ -1,13 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import Header from "../../organisms/Header";
+import Footer from "../../organisms/Footer";
 
 export default class Top extends React.Component {
   render() {
     return (
-      <div>
-        {!this.props.isLoggedIn && this.props.history.push("/login")}
-        <p>Hello, World!!</p>
-      </div>
+      <>
+        {/*!this.props.isLoggedIn && this.props.history.push("/login")*/}
+        <Header />
+        <Footer />
+      </>
     );
   }
 }
