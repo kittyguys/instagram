@@ -2,6 +2,9 @@ var express = require("express");
 const multer = require("multer");
 var router = express.Router();
 const UserModel = require("../db/models/user");
+// const checkToken = require("../utils/checkToken").checkToken;
+const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
 const storage = multer.diskStorage({
   destination: "./public/images/avatars",
@@ -11,13 +14,34 @@ const storage = multer.diskStorage({
 });
 const uploader = multer({ storage });
 
+// // login
+// router.post("/login", function(req, res, next) {
+//   checkToken();
+//   const { id, password } = req.body;
+//   UserModel.findOne({ id, password }, (err, result) => {
+//     if (result === null) res.status(500);
+//     else res.status(200).json({ id: result._id });
+//   });
+// });
+
 // login
 router.post("/login", function(req, res, next) {
-  const { id, password } = req.body;
-  UserModel.findOne({ id, password }, (err, result) => {
-    if (result === null) res.status(500);
-    else res.status(200).json({ id: result._id });
-  });
+  passport.authenticate("local", { session: false }, (err, user, info) => {
+    if (err || !user) {
+      return res.status(400).json({
+        message: "Something is not right",
+        user: user
+      });
+    }
+    req.login(user, { session: false }, err => {
+      if (err) {
+        res.send(err);
+      }
+      // generate a signed son web token with the contents of user object and return it in the response
+      const token = jwt.sign(user.toJSON(), "your_jwt_secret");
+      return res.json({ user, token });
+    });
+  })(req, res);
 });
 
 // idでfind
@@ -122,22 +146,31 @@ router.post("/upload", uploader.single("image"), function(req, res, next) {
 // userの登録
 router.post("/register", function(req, res) {
   const { id, password } = req.body;
-  new UserModel({
-    id,
-    password,
-    avater: "",
-    photos: [],
-    follow: [],
-    follower: []
-  }).save(err => {
-    if (err) res.status(500).send();
-    else {
-      UserModel.find({}, (findErr, userList) => {
-        if (findErr) res.status(500).send();
-        else res.status(200).send(userList);
+  UserModel.findOne({ id, password }).then(user => {
+    console.log(user);
+    if (!user) {
+      new UserModel({
+        id,
+        password,
+        avater: "",
+        photos: [],
+        follow: [],
+        follower: []
+      }).save(err => {
+        if (err) res.status(500).send();
+        else {
+          UserModel.find({}, (findErr, userList) => {
+            if (findErr) res.status(500).send();
+            else res.status(200).send(userList);
+          });
+        }
       });
+    } else {
+      res.send("このIDとパスワードは使用できません。");
     }
   });
 });
 
 module.exports = router;
+
+// curl -X POST -H "Content-Type: application/json" -d '{"id":"", "pass":""}' localhost:3000/users/login
