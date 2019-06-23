@@ -1,4 +1,4 @@
-const userReducer = (
+const loginReducer = (
   state = { uid: "", upass: "", isLoggedIn: false, errMessage: false },
   action
 ) => {
@@ -22,4 +22,4 @@ const userReducer = (
   }
 };
 
-export default userReducer;
+export default loginReducer;

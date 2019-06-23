@@ -1,6 +1,12 @@
 import { createStore, combineReducers } from "redux";
-import userReducer from "./reducers";
+import loginReducer from "./reducers/login";
+import uploadReducer from "./reducers/upload";
 
-const store = createStore(userReducer);
+const rootReducer = combineReducers({
+  login: loginReducer,
+  upload: uploadReducer
+});
+
+const store = createStore(rootReducer);
 
 export default store;

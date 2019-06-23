@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Title from "../../atoms/Title";
 import RegistLink from "../../atoms/RegistLink";
+import axios from "axios";
 
 const LoginFormWrap = styled.div`
   color: #262626;
@@ -136,14 +137,21 @@ export default class Login extends React.Component {
     this.changePass = this.changePass.bind(this);
   }
 
-  login() {
-    const promise = new Promise((resolve, reject) =>
-      setTimeout(() => {
-        this.props.login(this.state.uid, this.state.upass);
-        resolve();
-      }, 1000)
+  async login() {
+    const data = {
+      id: this.state.uid,
+      password: this.state.upass
+    };
+    await new Promise(resolve =>
+      axios
+        .post(`${process.env.API_PATH}/login`, data)
+        .then(() => {
+          this.props.login(this.state.uid, this.state.upass);
+          resolve();
+        })
+        .catch(error => {})
     );
-    promise.then(() => this.props.isLoggedIn && this.props.history.push("/"));
+    this.props.isLoggedIn && this.props.history.push("/");
   }
 
   changeId(e) {
