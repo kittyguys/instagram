@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../../organisms/Header";
 import FooterContainer from "../../organisms/Footer/FooterContainer";
+import axios from "axios";
 
 export default class Top extends React.Component {
   getRequest() {
@@ -20,6 +21,12 @@ export default class Top extends React.Component {
         {/*!this.props.isLoggedIn && this.props.history.push("/login")*/}
         <Header />
         <FooterContainer />
+        <button
+          style={{ marginTop: "100px" }}
+          onClick={() => {
+            this.register();
+          }}
+        ></button>
       </>
     );
   }

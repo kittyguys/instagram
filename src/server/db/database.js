@@ -1,7 +1,7 @@
 let mongoose = require("mongoose");
 
 const server = "localhost:27017";
-const database = "test";
+const database = "instagram";
 
 class Database {
   constructor() {

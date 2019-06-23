@@ -146,10 +146,13 @@ export default class Login extends React.Component {
     };
     await new Promise(resolve =>
       axios
-        .post(`${process.env.API_PATH}/login`, data)
+        .post(`${process.env.API_PATH}/users/login`, data)
         .then(response => {
-          if (response.data.id) {
-            this.props.login(response.user.id, this.state.upass);
+          if (response.data.user) {
+            this.props.login(
+              response.data.user.id,
+              response.data.user.password
+            );
             this.setState({ isLoggedIn: true });
           } else {
             this.setState({ errMessage: true });
@@ -227,7 +230,6 @@ export default class Login extends React.Component {
         <LoginFormBox>
           <RegistLink />
         </LoginFormBox>
-        {this.props.isLoggedIn && "ログイン認証OK"}
       </LoginFormWrap>
     );
   }
