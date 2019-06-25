@@ -1,9 +1,16 @@
 const loginReducer = (
-  state = { uid: "", upass: "", isLoggedIn: false, errMessage: false },
+  state = {
+    uid: "",
+    upass: "",
+    isLoggedIn: false,
+    errMessage: false,
+    token: ""
+  },
   action
 ) => {
   switch (action.type) {
     case "LOGIN":
+      console.log(action);
       return {
         ...state,
         uid: action.uid,

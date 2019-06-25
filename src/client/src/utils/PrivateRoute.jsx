@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { Route } from "react-router-dom";
 import LoginContainer from "../components/organisms/Login/LoginContainer";
 // import AuthService from "./services/AuthService"; // ログインチェックを行うサービス.
 
@@ -36,7 +37,7 @@ class PrivateRoute extends Component {
     const { component: Component, ...rest } = this.props;
 
     // ログインチェック状態を取得.
-    const token = localStorage.getItem("token"); //this.props.login;
+    const token = this.props.token; //this.props.login;
     console.log(token);
     // // ログインチェック前なら、ローディングを表示.
     // if (loading) {
@@ -60,4 +61,14 @@ class PrivateRoute extends Component {
   }
 }
 
-export default PrivateRoute;
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    token: state.login.token
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(PrivateRoute);
