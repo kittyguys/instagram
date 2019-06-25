@@ -8,8 +8,8 @@ const loginReducer = (
         ...state,
         uid: action.uid,
         upass: action.upass,
-        isLoggedIn: true,
-        errMessage: false
+        errMessage: false,
+        token: action.token
       };
     default:
       return state;

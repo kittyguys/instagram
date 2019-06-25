@@ -7,12 +7,13 @@ const mapStateToProps = state => {
     uid: state.login.uid,
     upass: state.login.upass,
     isLoggedIn: state.login.isLoggedIn,
-    errMessage: state.login.errMessage
+    errMessage: state.login.errMessage,
+    token: state.login.token
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  login: (uid, upass) => dispatch(login(uid, upass))
+  login: (uid, upass, token) => dispatch(login(uid, upass, token))
 });
 
 export default connect(

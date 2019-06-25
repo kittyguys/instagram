@@ -151,8 +151,10 @@ export default class Login extends React.Component {
           if (response.data.user) {
             this.props.login(
               response.data.user.id,
-              response.data.user.password
+              response.data.user.password,
+              response.data.token
             );
+            localStorage.setItem("token", response.data.token);
             this.setState({ isLoggedIn: true });
           } else {
             this.setState({ errMessage: true });
@@ -161,7 +163,6 @@ export default class Login extends React.Component {
         })
         .catch(error => {})
     );
-    this.state.isLoggedIn && this.props.history.push("/");
   }
 
   changeId(e) {
