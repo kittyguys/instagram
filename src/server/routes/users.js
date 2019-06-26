@@ -2,7 +2,6 @@ var express = require("express");
 const multer = require("multer");
 var router = express.Router();
 const UserModel = require("../db/models/user");
-// const checkToken = require("../utils/checkToken").checkToken;
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
@@ -13,16 +12,6 @@ const storage = multer.diskStorage({
   }
 });
 const uploader = multer({ storage });
-
-// // login
-// router.post("/login", function(req, res, next) {
-//   checkToken();
-//   const { id, password } = req.body;
-//   UserModel.findOne({ id, password }, (err, result) => {
-//     if (result === null) res.status(500);
-//     else res.status(200).json({ id: result._id });
-//   });
-// });
 
 // login
 router.post("/login", function(req, res, next) {
@@ -148,7 +137,7 @@ router.post("/register", function(req, res) {
   const { id, password } = req.body;
   UserModel.findOne({ id, password }).then(user => {
     console.log(user);
-    if (!user) {
+    if (!user && id != "" && password != "") {
       new UserModel({
         id,
         password,
@@ -161,16 +150,14 @@ router.post("/register", function(req, res) {
         else {
           UserModel.find({}, (findErr, userList) => {
             if (findErr) res.status(500).send();
-            else res.status(200).send(userList);
+            else res.status(200).json({ userList });
           });
         }
       });
     } else {
-      res.send("このIDとパスワードは使用できません。");
+      res.json({ msg: "このIDとパスワードは使用できません。" });
     }
   });
 });
 
 module.exports = router;
-
-// curl -X POST -H "Content-Type: application/json" -d '{"id":"", "pass":""}' localhost:3000/users/login
