@@ -1,14 +1,12 @@
 import { createStore, combineReducers } from "redux";
 import loginReducer from "./reducers/login";
-import uploadReducer from "./reducers/upload";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { reducer as formReducer } from 'redux-form';
+import { reducer as formReducer } from "redux-form";
 
 const rootReducer = combineReducers({
   login: loginReducer,
-  upload: uploadReducer,
-  form: formReducer,
+  form: formReducer
 });
 
 // 永続化の設定
