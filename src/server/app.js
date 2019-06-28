@@ -24,4 +24,6 @@ app.use("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/../server/public/index.html"));
 });
 
+database.connect();
+
 module.exports = app;

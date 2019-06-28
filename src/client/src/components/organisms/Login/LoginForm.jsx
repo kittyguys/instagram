@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Title from "../../atoms/Title";
-import LoginLink from "../../atoms/LoginLink";
+import RegistLink from "../../atoms/RegistLink";
 import { Field, reduxForm } from 'redux-form';
 
 const LoginFormWrap = styled.form`
@@ -163,13 +163,13 @@ const renderField = ({
   </InputWrap>
 )
 
-const RegisterForm = props => {
+const LoginForm = props => {
   const { handleSubmit, submitting, onSubmit } = props
   return (
     <LoginFormWrap onSubmit={handleSubmit(onSubmit)}>
       <LoginFormBox>
         <Title />
-        <div>{props.errMessage && <ErrMessage>ユーザーネームまたはパスワードが無効です。</ErrMessage>}</div>
+        <div>{props.errMessage && <ErrMessage>ログイン認証エラー</ErrMessage>}</div>
         <div>
           <Field name="uid" type="text" component={renderField} label="ユーザーネーム" />
           <Field name="upass" type="text" component={renderField} label="パスワード" />
@@ -178,19 +178,19 @@ const RegisterForm = props => {
               type="submit"
               disabled={submitting}
             >
-              登録する
+              ログインする
             </Button>
           </ButtonWrap>
         </div>
       </LoginFormBox>
       <LoginFormBox>
-        <LoginLink />
+        <RegistLink />
       </LoginFormBox>
     </LoginFormWrap>
   );
 }
 
 export default reduxForm({
-  form: 'register',
+  form: 'login',
   validate
-})(RegisterForm)
+})(LoginForm)
