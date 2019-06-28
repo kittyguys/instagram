@@ -10,7 +10,6 @@ const loginReducer = (
 ) => {
   switch (action.type) {
     case "LOGIN":
-      console.log(action);
       return {
         ...state,
         uid: action.uid,

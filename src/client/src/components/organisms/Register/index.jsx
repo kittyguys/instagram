@@ -1,13 +1,6 @@
 import React from "react";
-import styled from "styled-components";
 import axios from "axios";
 import RegisterForm from "./RegisterForm";
-
-const ErrMessage = styled.p`
-  color: #ed4956;
-  margin: 0 40px 6px;
-  text-align: center;
-`;
 
 export default class Register extends React.Component {
   constructor(props) {
@@ -28,7 +21,6 @@ export default class Register extends React.Component {
         .then(response => {
           if (response.data.userList) {
             alert('ユーザ登録が成功しました。')
-            console.log(response.data.userList);
           } else {
             this.setState({ errMessage: true });
           }
@@ -38,17 +30,9 @@ export default class Register extends React.Component {
     );
   }
 
-  submit(values) {
-    console.log(values)
-  }
-
   render() {
     return (
-      <>
-        <div>{this.state.errMessage && <ErrMessage>ユーザーネームまたはパスワードが無効です。</ErrMessage>}</div>
-        <RegisterForm onSubmit={values => this.register(values)} />
-      </>
+      <RegisterForm onSubmit={values => this.register(values)} errMessage={this.state.errMessage} />
     );
   }
 }
-

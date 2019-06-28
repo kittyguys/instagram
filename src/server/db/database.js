@@ -4,11 +4,7 @@ const server = "localhost:27017";
 const database = "instagram";
 
 class Database {
-  constructor() {
-    this._connect();
-  }
-
-  _connect() {
+  connect() {
     mongoose
       .connect(`mongodb://${server}/${database}`)
       .then(() => {
