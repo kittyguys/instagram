@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import FooterInner from "../../molecules/FooterInner";
+import FooterInner from "./FooterInner";
 
 const FooterWrap = styled.div`
   &::before {

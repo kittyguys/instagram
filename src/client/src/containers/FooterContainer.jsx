@@ -1,6 +1,6 @@
 //import { selectPhoto } from "../../../redux/actionCreators/login";
 import { connect } from "react-redux";
-import Footer from "./";
+import Footer from "../components/Footer";
 
 const mapStateToProps = state => {
   return {

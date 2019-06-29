@@ -2,20 +2,20 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const RegistItem = styled.div`
+const SignUpWrap = styled.div`
   color: #262626;
   margin: 15px;
   text-align: center;
 `;
 
-export default class RegistLink extends React.Component {
+export default class SignUpLink extends React.Component {
   render() {
     return (
-      <RegistItem>
+      <SignUpWrap>
         アカウントをお持ちでないですか？
         <br />
-        <Link to="/register">登録する</Link>
-      </RegistItem>
+        <Link to="/signup">登録する</Link>
+      </SignUpWrap>
     );
   }
 }

@@ -1,7 +1,6 @@
 import React from "react";
-import Header from "../../organisms/Header";
-import FooterContainer from "../../organisms/Footer/FooterContainer";
-import axios from "axios";
+import Header from "../Header";
+import FooterContainer from "../../containers/FooterContainer";
 
 export default class Top extends React.Component {
   render() {
