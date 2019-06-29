@@ -14,7 +14,7 @@ export default class RegistLink extends React.Component {
       <RegistItem>
         アカウントをお持ちでないですか？
         <br />
-        <Link to="/register">登録する</Link>
+        <Link to="/signup">登録する</Link>
       </RegistItem>
     );
   }

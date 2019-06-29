@@ -1,26 +1,26 @@
 import React from "react";
 import axios from "axios";
-import RegisterForm from "./RegisterForm";
+import SignUpForm from "./SignUpForm";
 
-export default class Register extends React.Component {
+export default class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      errMessage: false,
-    }
+      errMessage: false
+    };
   }
 
-  async register(values) {
+  async signup(values) {
     const data = {
       id: values.uid,
       password: values.upass
     };
     await new Promise(resolve =>
       axios
-        .post(`${process.env.API_PATH}/users/register`, data)
+        .post(`${process.env.API_PATH}/users/signup`, data)
         .then(response => {
           if (response.data.userList) {
-            alert('ユーザ登録が成功しました。')
+            alert("ユーザ登録が成功しました。");
           } else {
             this.setState({ errMessage: true });
           }
@@ -32,7 +32,10 @@ export default class Register extends React.Component {
 
   render() {
     return (
-      <RegisterForm onSubmit={values => this.register(values)} errMessage={this.state.errMessage} />
+      <SignUpForm
+        onSubmit={values => this.signup(values)}
+        errMessage={this.state.errMessage}
+      />
     );
   }
 }
