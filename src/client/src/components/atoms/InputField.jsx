@@ -12,7 +12,7 @@ class FieldFileInput extends Component {
       input: { onChange }
     } = this.props;
     onChange(e.target.files[0]);
-    this.props.history.push("/creat/details");
+    this.props.history.push("/create/details");
   }
 
   render() {

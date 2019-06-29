@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Route } from "react-router-dom";
-import LoginContainer from "../components/organisms/Login/LoginContainer";
+import LoginContainer from "../containers/LoginContainer";
 
 class PrivateRoute extends Component {
   render() {

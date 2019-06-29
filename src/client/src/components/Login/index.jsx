@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import LoginForm from './LoginForm';
+import LoginForm from "../Form/LoginForm";
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -39,7 +39,10 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <LoginForm onSubmit={values => this.login(values)} errMessage={this.state.errMessage} />
+      <LoginForm
+        onSubmit={values => this.login(values)}
+        errMessage={this.state.errMessage}
+      />
     );
   }
 }

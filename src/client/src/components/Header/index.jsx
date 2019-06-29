@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import HeaderInner from "../../molecules/HeaderInner";
+import HeaderInner from "./HeaderInner";
 
 const HeaderWrap = styled.div`
   &::before {

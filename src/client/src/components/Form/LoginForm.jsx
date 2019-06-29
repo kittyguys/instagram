@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Title from "../../atoms/Title";
-import LoginLink from "../../atoms/LoginLink";
-import { Field, reduxForm } from 'redux-form';
+import Title from "../Icon/Title";
+import RegistLink from "../Link/SignUpLink";
+import { Field, reduxForm } from "redux-form";
 
 const LoginFormWrap = styled.form`
   color: #262626;
@@ -127,70 +127,68 @@ const ErrMessage = styled.p`
 
 const validate = values => {
   const errors = {};
-  if(!values.uid) {
-    errors.uid = 'Required'
+  if (!values.uid) {
+    errors.uid = "Required";
   } else if (values.uid.length > 10) {
-    errors.uid = 'Must be 10 characters or less'
+    errors.uid = "Must be 10 characters or less";
   }
-  if(!values.upass) {
-    errors.upass = 'Required'
+  if (!values.upass) {
+    errors.upass = "Required";
   } else if (values.upass.length > 10) {
-    errors.upass = 'Must be 10 characters or less'
+    errors.upass = "Must be 10 characters or less";
   }
-  return errors
-}
+  return errors;
+};
 
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error }
-}) => (
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <InputWrap>
     <InputBox>
       <InputInner>
-        <Label htmlFor={label}>
-          {label}
-        </Label>
-        <Input
-          {...input}
-          type={type}
-          name={label}
-        />
+        <Label htmlFor={label}>{label}</Label>
+        <Input {...input} type={type} name={label} />
         {touched && error && <div>{error}</div>}
       </InputInner>
     </InputBox>
   </InputWrap>
-)
+);
 
-const RegisterForm = props => {
-  const { handleSubmit, submitting, onSubmit } = props
+const LoginForm = props => {
+  const { handleSubmit, submitting, onSubmit } = props;
   return (
     <LoginFormWrap onSubmit={handleSubmit(onSubmit)}>
       <LoginFormBox>
         <Title />
-        <div>{props.errMessage && <ErrMessage>ユーザーネームまたはパスワードが無効です。</ErrMessage>}</div>
         <div>
-          <Field name="uid" type="text" component={renderField} label="ユーザーネーム" />
-          <Field name="upass" type="text" component={renderField} label="パスワード" />
+          {props.errMessage && <ErrMessage>ログイン認証エラー</ErrMessage>}
+        </div>
+        <div>
+          <Field
+            name="uid"
+            type="text"
+            component={renderField}
+            label="ユーザーネーム"
+          />
+          <Field
+            name="upass"
+            type="text"
+            component={renderField}
+            label="パスワード"
+          />
           <ButtonWrap>
-            <Button
-              type="submit"
-              disabled={submitting}
-            >
-              登録する
+            <Button type="submit" disabled={submitting}>
+              ログインする
             </Button>
           </ButtonWrap>
         </div>
       </LoginFormBox>
       <LoginFormBox>
-        <LoginLink />
+        <RegistLink />
       </LoginFormBox>
     </LoginFormWrap>
   );
-}
+};
 
 export default reduxForm({
-  form: 'register',
+  form: "login",
   validate
-})(RegisterForm)
+})(LoginForm);

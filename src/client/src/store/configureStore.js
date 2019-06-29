@@ -1,5 +1,5 @@
 import { createStore, combineReducers } from "redux";
-import loginReducer from "./reducers/login";
+import loginReducer from "../reducers/login";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { reducer as formReducer } from "redux-form";
