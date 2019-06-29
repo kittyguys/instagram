@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Title from "../Icon/Title";
-import LoginLink from "../Link/SignUpLink";
+import LoginLink from "../Link/LoginLink";
 import { Field, reduxForm } from "redux-form";
 
 const LoginFormWrap = styled.form`
@@ -191,6 +191,6 @@ const SignUpForm = props => {
 };
 
 export default reduxForm({
-  form: "register",
+  form: "signup",
   validate
 })(SignUpForm);

@@ -1,6 +1,6 @@
-import { login } from "../actions/login";
 import { connect } from "react-redux";
 import Login from "../components/Login";
+import { loginStart } from "../actions/login";
 
 const mapStateToProps = state => {
   return {
@@ -13,7 +13,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  login: (uid, upass, token) => dispatch(login(uid, upass, token))
+  loginStart: values => dispatch(loginStart(values))
 });
 
 export default connect(
