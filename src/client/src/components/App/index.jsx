@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Top from "../Top/";
 import PrivateRoute from "../../utils/PrivateRoute";
 import SignUp from "../SignUp";
-import Detail from "../Detail";
+import Detail from "../../containers/DetailContainer";
 
 const App = () => (
   <Router>

@@ -1,6 +1,5 @@
-import { login } from "../../../redux/actionCreators/login";
 import { connect } from "react-redux";
-import Upload from "./";
+import Detail from "../components/Detail";
 
 const mapStateToProps = state => {
   return {
@@ -20,4 +19,4 @@ export default connect(
   mapStateToProps,
   null
   //mapDispatchToProps
-)(Upload);
+)(Detail);
