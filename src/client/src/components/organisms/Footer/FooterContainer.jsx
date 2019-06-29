@@ -1,3 +1,4 @@
+//import { selectPhoto } from "../../../redux/actionCreators/login";
 import { connect } from "react-redux";
 import Footer from "./";
 
@@ -10,7 +11,7 @@ const mapStateToProps = state => {
 };
 
 // const mapDispatchToProps = dispatch => ({
-//   login: (uid, upass) => dispatch(login(uid, upass))
+//   selectPhoto: () => dispatch(selectPhoto())
 // });
 
 export default connect(

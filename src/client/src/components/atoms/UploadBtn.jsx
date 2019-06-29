@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { Field, reduxForm } from "redux-form";
+import FieldFileInput from "./InputField";
 
 const UploadBtnWrap = styled.div`
   webkit-box-flex: 1;
@@ -26,26 +28,20 @@ const UploadBtnIcon = styled.span`
   width: 24px;
 `;
 
-export default class UploadBtn extends React.Component {
+class UploadBtn extends React.Component {
   render() {
     return (
       <UploadBtnWrap>
         <UploadBtnItem htmlFor="image">
           <UploadBtnIcon>
-            <input
-              type="file"
-              id="image"
-              name="image"
-              ref="image"
-              hidden
-              onChange={() => {
-                // this.sendUpload();
-                // this.setState({isDisplay: !this.state.isDisplay});
-              }}
-            />
+            <Field name="picture" component={FieldFileInput} type="file" />
           </UploadBtnIcon>
         </UploadBtnItem>
       </UploadBtnWrap>
     );
   }
 }
+
+export default reduxForm({
+  form: "photo"
+})(UploadBtn);
