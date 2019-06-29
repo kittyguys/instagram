@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Field, reduxForm } from "redux-form";
-import FieldFileInput from "./InputField";
+import { withRouter } from "react-router";
 
 const UploadBtnWrap = styled.div`
   webkit-box-flex: 1;
@@ -29,12 +29,38 @@ const UploadBtnIcon = styled.span`
 `;
 
 class UploadBtn extends React.Component {
+  getPhotoBlob(e) {}
   render() {
     return (
       <UploadBtnWrap>
         <UploadBtnItem htmlFor="image">
           <UploadBtnIcon>
-            <Field name="picture" component={FieldFileInput} type="file" />
+            <Field
+              name="blobUrl"
+              component={props => {
+                return (
+                  <>
+                    <input
+                      type="file"
+                      onChange={e => {
+                        props.input.onChange(() => {
+                          const createObjectURL =
+                            (window.URL || window.webkitURL).createObjectURL ||
+                            window.createObjectURL;
+                          const files = e.target.files[0];
+                          const blobUrl = createObjectURL(files);
+                          this.props.history.push({
+                            pathname: "/create/details",
+                            state: { blobUrl }
+                          });
+                          return blobUrl;
+                        });
+                      }}
+                    />
+                  </>
+                );
+              }}
+            />
           </UploadBtnIcon>
         </UploadBtnItem>
       </UploadBtnWrap>
@@ -44,4 +70,4 @@ class UploadBtn extends React.Component {
 
 export default reduxForm({
   form: "photo"
-})(UploadBtn);
+})(withRouter(UploadBtn));

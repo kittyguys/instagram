@@ -28,9 +28,11 @@ const FooterWrap = styled.div`
 export default class Footer extends React.Component {
   render() {
     return (
-      <FooterWrap>
-        <FooterInner />
-      </FooterWrap>
+      <>
+        <FooterWrap>
+          <FooterInner />
+        </FooterWrap>
+      </>
     );
   }
 }

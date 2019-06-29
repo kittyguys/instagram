@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { withRouter } from "react-router";
 
 const UploadModal = styled.div`
   position: fixed;
@@ -244,7 +245,7 @@ const UploadModal = styled.div`
   }
 `;
 
-export default class Upload extends React.Component {
+class Detail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -302,10 +303,12 @@ export default class Upload extends React.Component {
               ></textarea>
             </div>
             <div className="uploadForm__image">
-              <img
-                src="" /*{this.props.imagePath}*/
-                alt="アップロードする写真のプレビュー"
-              />
+              {this.props.history.location.state.blobUrl && (
+                <img
+                  src={this.props.history.location.state.blobUrl}
+                  alt="アップロードする写真のプレビュー"
+                />
+              )}
             </div>
           </section>
           <section>
@@ -332,3 +335,5 @@ export default class Upload extends React.Component {
     );
   }
 }
+
+export default withRouter(Detail);
