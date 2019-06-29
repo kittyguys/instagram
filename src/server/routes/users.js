@@ -133,7 +133,7 @@ router.post("/upload", uploader.single("image"), function(req, res, next) {
 });
 
 // userの登録
-router.post("/register", function(req, res) {
+router.post("/signup", function(req, res) {
   const { id, password } = req.body;
   UserModel.findOne({ id, password }).then(user => {
     console.log(user);

@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import LoginForm from "../Form/LoginForm";
 
 export default class Login extends React.Component {
@@ -10,31 +9,9 @@ export default class Login extends React.Component {
     };
   }
 
-  async login(values) {
-    const data = {
-      id: values.uid,
-      password: values.upass
-    };
-    await new Promise(resolve =>
-      axios
-        .post(`${process.env.API_PATH}/users/login`, data)
-        .then(response => {
-          if (response.data.user) {
-            this.props.login(
-              response.data.user.id,
-              response.data.user.password,
-              response.data.token
-            );
-            localStorage.setItem("token", response.data.token);
-          } else {
-            this.setState({ errMessage: true });
-          }
-          resolve();
-        })
-        .catch(error => {
-          this.setState({ errMessage: true });
-        })
-    );
+  login(values) {
+    console.log(values);
+    this.props.loginStart(values);
   }
 
   render() {
