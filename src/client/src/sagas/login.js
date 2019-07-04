@@ -21,11 +21,12 @@ const login = async values => {
 function* runLogin(values) {
   try {
     const response = yield call(login, values);
-    const { uid, upass } = response.data.user;
+    console.log(response)
+    const { _id } = response.data.user;
     const token = response.data.token;
 
     localStorage.setItem("token", response.data.token);
-    yield put(loginSuccess(uid, upass, token));
+    yield put(loginSuccess(_id, token));
   } catch (error) {
     yield put(loginFailed(error));
   }

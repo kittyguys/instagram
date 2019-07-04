@@ -8,10 +8,9 @@ export const loginStart = ({ uid, upass }) => ({
   upass
 });
 
-export const loginSuccess = (uid, upass, token) => ({
+export const loginSuccess = (_id, token) => ({
   type: LOGIN_SUCCESS,
-  uid,
-  upass,
+  _id,
   token
 });
 

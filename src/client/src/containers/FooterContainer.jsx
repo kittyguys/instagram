@@ -6,7 +6,7 @@ const mapStateToProps = state => {
     uid: state.uid,
     upass: state.upass,
     isLoggedIn: state.isLoggedIn,
-    blobUrl: !!state.form.photo ? state.form.photo.values.blobUrl : ""
+    // blobUrl: !!state.form.photo ? state.form.photo.values.blobUrl : ""
   };
 };
 

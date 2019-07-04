@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import loginReducer from "../reducers/login";
+import profileReducer from "../reducers/profile";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { reducer as formReducer } from "redux-form";
@@ -11,6 +12,7 @@ const sagaMiddleWare = createSagaMiddleware();
 
 const rootReducer = combineReducers({
   login: loginReducer,
+  profile: profileReducer,
   form: formReducer
 });
 

@@ -15,7 +15,7 @@ const uploader = multer({ storage });
 
 // login
 router.post("/login", function(req, res, next) {
-  passport.authenticate("local", { session: false }, (err, user, info) => {
+  passport.authenticate("local", { session: false }, (err, user) => {
     if (err || !user) {
       return res.status(400).json({
         message: "Something is not right",
@@ -35,10 +35,10 @@ router.post("/login", function(req, res, next) {
 
 // idでfind
 router.get("/me", function(req, res) {
-  const { uid } = req.body;
-  UserModel.findById(uid, (err, user) => {
+  const _id = req.query._id;
+  UserModel.findById(_id, (err, user) => {
     if (err) res.status(500);
-    else res.status(200).json(user);
+    else res.status(200).json({ user });
   });
 });
 
