@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Profile from "../components/Profile";
-import { fetchUserStart } from "../actions/profile";
+import { fetchUserStart, changeMenu } from "../actions/profile";
 
 const mapStateToProps = state => ({
     _id: state.login._id,
@@ -8,11 +8,13 @@ const mapStateToProps = state => ({
     avater: state.profile.avater,
     photos: state.profile.photos,
     follow: state.profile.follow,
-    follower: state.profile.follower
+    follower: state.profile.follower,
+    selected: state.profile.selected,
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchUserStart: _id => dispatch(fetchUserStart(_id))
+    fetchUserStart: _id => dispatch(fetchUserStart(_id)),
+    changeMenu: selected => dispatch(changeMenu(selected)),
 });
 
 export default connect(

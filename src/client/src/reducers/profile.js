@@ -6,6 +6,7 @@ const profileReducer = (
       photos: [],
       follow: [],
       follower: [],
+      selected: "grid"
     },
     action
   ) => {
@@ -24,6 +25,11 @@ const profileReducer = (
         };
       case "FETCHUSER_FAILED":
         return state;
+      case "CHANGE_MENU":
+        return {
+          ...state,
+          selected: action.selected,
+        }
       default:
         return state;
     }
