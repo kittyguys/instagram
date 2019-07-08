@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { withRouter } from 'react-router';
 
 const ProfileBtnWrap = styled.div`
   webkit-box-flex: 1;
@@ -26,14 +27,16 @@ const ProfileBtnIcon = styled.span`
   width: 24px;
 `;
 
-export default class ProfileBtn extends React.Component {
+class ProfileBtn extends React.Component {
   render() {
     return (
       <ProfileBtnWrap>
-        <ProfileBtnItem href="">
-          <ProfileBtnIcon />
+        <ProfileBtnItem>
+          <ProfileBtnIcon onClick={() => this.props.history.push('/profile')} />
         </ProfileBtnItem>
       </ProfileBtnWrap>
     );
   }
 }
+
+export default withRouter(ProfileBtn);

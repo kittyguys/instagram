@@ -7,6 +7,10 @@ const userSchema = new mongoose.Schema({
     photos: [String],
     follow: [String],
     follower: [String],
+    mail: String,
+    tel: String,
+    sex: String,
+    desc: String,
 })
 
 module.exports = mongoose.model('User', userSchema);

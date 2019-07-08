@@ -1,8 +1,7 @@
 const loginReducer = (
   state = {
-    uid: "",
+    _id: "",
     upass: "",
-    isLoggedIn: false,
     errMessage: false,
     token: ""
   },
@@ -14,8 +13,7 @@ const loginReducer = (
     case "LOGIN_SUCCESS":
       return {
         ...state,
-        uid: action.uid,
-        upass: action.upass,
+        _id: action._id,
         errMessage: false,
         token: action.token
       };

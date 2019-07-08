@@ -15,7 +15,7 @@ const uploader = multer({ storage });
 
 // login
 router.post("/login", function(req, res, next) {
-  passport.authenticate("local", { session: false }, (err, user, info) => {
+  passport.authenticate("local", { session: false }, (err, user) => {
     if (err || !user) {
       return res.status(400).json({
         message: "Something is not right",
@@ -35,11 +35,41 @@ router.post("/login", function(req, res, next) {
 
 // idでfind
 router.get("/me", function(req, res) {
-  const { uid } = req.body;
-  UserModel.findById(uid, (err, user) => {
+  const _id = req.query._id;
+  UserModel.findById(_id, (err, user) => {
     if (err) res.status(500);
-    else res.status(200).json(user);
+    else res.status(200).json({ user });
   });
+});
+
+// プロフィール編集
+router.post("/profileedit", function(req, res) {
+  console.log(req.body)
+  const { _id, values } = req.body;
+  let userTmp = {};
+  UserModel.findById(_id, (err, user) => {
+    if(err) res.status(500).send()
+    else {
+      userTmp = user;
+      values.id && (userTmp.id = values.id);
+      values.mail && (userTmp.mail = values.mail);
+      values.sex && (userTmp.sex = values.sex);
+      values.desc && (userTmp.desc = values.desc);
+      values.tel && (userTmp.tel = values.tel);
+      console.log('userTmp', userTmp)
+      UserModel.findByIdAndUpdate(_id, { 
+        id: userTmp.id, 
+        sex: userTmp.sex, 
+        mail: userTmp.mail, 
+        tel: userTmp.tel, 
+        desc: userTmp.desc 
+      }, {new: true}, (err, user) => {
+        console.log(user)
+        if(err) res.status(500).send()
+        else res.status(200).json({ user });
+      })
+    }
+  })
 });
 
 // follow
@@ -144,7 +174,11 @@ router.post("/signup", function(req, res) {
         avater: "",
         photos: [],
         follow: [],
-        follower: []
+        follower: [],
+        mail: "",
+        tel: null,
+        sex: "",
+        desc: "",
       }).save(err => {
         if (err) res.status(500).send();
         else {
