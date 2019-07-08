@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { withRouter } from "react-router";
+import Axios from "axios";
+import { resolve } from "dns";
+import { convertCompilerOptionsFromJson } from "typescript";
 
 const UploadModal = styled.div`
   position: fixed;
@@ -249,18 +252,61 @@ class Detail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isDisplay: Boolean,
       caption: ""
     };
-    this.closeModal = this.closeModal.bind(this);
-  }
-
-  closeModal() {
-    //return this.props.setDisplay(false);
+    this.uploadDetail = this.uploadDetail.bind(this);
+    this.handleChangeCaption = this.handleChangeCaption.bind(this);
   }
 
   handleChangeCaption(event) {
     this.setState({ caption: event.target.value });
+  }
+
+  getBlobObj() {
+    return new Promise(resolve => {
+      const blobUrl = this.props.history.location.state.blobUrl;
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function() {
+        resolve(xhr.response);
+      };
+      xhr.responseType = "blob";
+      xhr.open("GET", blobUrl, true);
+      xhr.send();
+    });
+  }
+
+  blobToFile(blobObj, fileName) {
+    return new Promise(resolve => {
+      const fileObj = new File([blobObj], fileName);
+      resolve(fileObj);
+    });
+  }
+
+  appendToForm(key, obj) {
+    return new Promise(resolve => {
+      const formData = new FormData();
+      formData.append(key, obj);
+      resolve(formData);
+    });
+  }
+
+  async uploadDetail() {
+    const blobObj = await this.getBlobObj();
+    const fileType = blobObj.type.replace("image/", ".");
+    const fileName = new Date().getTime() + fileType;
+    const fileObj = await this.blobToFile(blobObj, fileName);
+
+    const formData = await this.appendToForm("photo", fileObj);
+
+    Axios.post("/photos/upload", formData, {
+      headers: { "content-type": "multipart/form-data" }
+    })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        new Error(error);
+      });
   }
 
   render() {
@@ -272,7 +318,7 @@ class Detail extends React.Component {
               <button
                 className=""
                 onClick={() => {
-                  this.closeModal();
+                  this.props.history.push("/");
                 }}
               >
                 <span>戻る</span>
@@ -280,7 +326,7 @@ class Detail extends React.Component {
             </div>
             <h1>新規投稿</h1>
             <div className="uploadHeader__share">
-              <button onClick={() => {}}>シェアする</button>
+              <button onClick={this.uploadDetail}>シェアする</button>
             </div>
           </div>
         </header>

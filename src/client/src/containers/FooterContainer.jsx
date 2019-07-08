@@ -5,13 +5,11 @@ const mapStateToProps = state => {
   return {
     uid: state.uid,
     upass: state.upass,
-    isLoggedIn: state.isLoggedIn,
-    blobUrl: !!state.form.photo ? state.form.photo.values.blobUrl : ""
+    isLoggedIn: state.isLoggedIn
   };
 };
 
 // const mapDispatchToProps = dispatch => ({
-//   selectPhoto: () => dispatch(selectPhoto())
 // });
 
 export default connect(

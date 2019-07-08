@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 const uploader = multer({ storage });
 
 /* GET users listing. */
-router.post("/upload", uploader.single("image"), function(req, res, next) {
+router.post("/upload", uploader.single("photo"), function(req, res, next) {
   const file = req.file;
   const meta = req.body;
   // デッバグのため、アップしたファイルの名前を表示する
@@ -21,12 +21,16 @@ router.post("/upload", uploader.single("image"), function(req, res, next) {
   // DBに写真データを名前と一緒に保存
   new PhotoModel({
     name: meta.name,
-    imagePath: file.path.replace("public/", ""),
+    //imagePath: file.path.replace("public/", ""),
     good: 0
   }).save(err => {
-    if (err) res.status(500);
+    if (err) {
+      res.status(500);
+    }
     // アップ完了したら200ステータスを送る
-    else res.status(200).json({ file, meta, msg: "image uploaded" });
+    else {
+      res.status(200).json({ file, meta, msg: "image uploaded" });
+    }
   });
 });
 

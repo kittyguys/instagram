@@ -42,5 +42,10 @@ module.exports = {
         ]
       }
     ]
+  },
+  node: {
+    dns: "empty",
+    fs: "empty",
+    module: "empty"
   }
 };
