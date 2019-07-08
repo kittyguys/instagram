@@ -9,14 +9,18 @@ export const fetchUserStart = _id => ({
   _id
 });
 
-export const fetchUserSuccess = ({_id, id, avater, photos, follow, follower}) => ({
+export const fetchUserSuccess = ({_id, id, avater, photos, follow, follower, mail, tel, sex, desc}) => ({
   type: FETCHUSER_SUCCESS,
   _id,
   id,
   avater,
   photos,
   follow,
-  follower
+  follower,
+  mail,
+  tel,
+  sex,
+  desc,
 });
 
 export const fetchUserFailed = () => ({

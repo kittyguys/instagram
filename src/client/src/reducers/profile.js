@@ -6,6 +6,10 @@ const profileReducer = (
       photos: [],
       follow: [],
       follower: [],
+      mail: "",
+      tel: null,
+      sex: "",
+      desc: "",
       selected: "grid"
     },
     action
@@ -21,7 +25,11 @@ const profileReducer = (
           avatar: action.avater,
           photos: action.photos,
           follow: action.follow,
-          follower: action.follower
+          follower: action.follower,
+          mail: action.mail,
+          tel: action.tel,
+          sex: action.sex,
+          desc: action.desc,
         };
       case "FETCHUSER_FAILED":
         return state;

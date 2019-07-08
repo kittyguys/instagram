@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { withRouter } from "react-router";
 
 const ProfileMainWrapper = styled.div`
 	padding-top: 70px;
@@ -34,10 +35,11 @@ const ProfileEdit = styled.div`
 	text-align: center;
 	width: 100%;
 	border-radius: 4px;
+	cursor: pointer;
 `
 
 
-export default class ProfileMain extends React.Component {
+class ProfileMain extends React.Component {
     render() {
 		const { id, avater } = this.props;
         return (
@@ -47,9 +49,13 @@ export default class ProfileMain extends React.Component {
                 </ProfileAvater>
                 <ProfileNameBox>
                     <ProfileName>{id}</ProfileName>
-                    <ProfileEdit>プロフィールを編集</ProfileEdit>
+					<ProfileEdit onClick={() => this.props.history.push('/profileedit')}>
+						プロフィールを編集
+					</ProfileEdit>
                 </ProfileNameBox>
             </ProfileMainWrapper>
     );
   }
 }
+
+export default withRouter(ProfileMain)
