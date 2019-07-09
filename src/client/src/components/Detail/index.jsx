@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { withRouter } from "react-router";
 import Axios from "axios";
-import { resolve } from "dns";
-import { convertCompilerOptionsFromJson } from "typescript";
 
 const UploadModal = styled.div`
   position: fixed;
@@ -277,16 +275,10 @@ class Detail extends React.Component {
 
   blobToFile(blobObj, fileName) {
     return new Promise(resolve => {
-      const fileObj = new File([blobObj], fileName);
+      const fileObj = new File([blobObj], fileName, {
+        lastModified: 0
+      });
       resolve(fileObj);
-    });
-  }
-
-  appendToForm(key, obj) {
-    return new Promise(resolve => {
-      const formData = new FormData();
-      formData.append(key, obj);
-      resolve(formData);
     });
   }
 
@@ -295,8 +287,10 @@ class Detail extends React.Component {
     const fileType = blobObj.type.replace("image/", ".");
     const fileName = new Date().getTime() + fileType;
     const fileObj = await this.blobToFile(blobObj, fileName);
+    console.log(fileObj.lastModified);
 
-    const formData = await this.appendToForm("photo", fileObj);
+    const formData = new FormData();
+    formData.append("photo", fileObj);
 
     Axios.post("/photos/upload", formData, {
       headers: { "content-type": "multipart/form-data" }

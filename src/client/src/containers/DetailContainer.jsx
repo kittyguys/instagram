@@ -3,7 +3,7 @@ import Detail from "../components/Detail";
 
 const mapStateToProps = state => {
   return {
-    blobUrl: !!state.form.photo ? state.form.photo.values.blobUrl : ""
+    // _id: state.login._id
   };
 };
 

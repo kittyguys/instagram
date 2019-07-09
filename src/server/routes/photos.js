@@ -5,7 +5,7 @@ var router = express.Router();
 const PhotoModel = require("../db/models/photo");
 
 const storage = multer.diskStorage({
-  destination: "./public/images/photos",
+  destination: "src/server/public/images/photos",
   filename: (req, file, cb) => {
     cb(null, file.originalname);
   }
@@ -21,8 +21,9 @@ router.post("/upload", uploader.single("photo"), function(req, res, next) {
   // DBに写真データを名前と一緒に保存
   new PhotoModel({
     name: meta.name,
-    //imagePath: file.path.replace("public/", ""),
-    good: 0
+    imagePath: file.path.replace("public/", ""),
+    date: file.lastModified,
+    like: 0
   }).save(err => {
     if (err) {
       res.status(500);
