@@ -38,6 +38,10 @@ const ProfileEdit = styled.div`
 	cursor: pointer;
 `
 
+const AvatarImage = styled.img`
+	width: 100%;
+`
+
 
 class ProfileMain extends React.Component {
     render() {
@@ -45,7 +49,7 @@ class ProfileMain extends React.Component {
         return (
             <ProfileMainWrapper>
                 <ProfileAvater>
-                    <img src="" alt=""/>
+                    <AvatarImage src={avater} alt="avatar"/>
                 </ProfileAvater>
                 <ProfileNameBox>
                     <ProfileName>{id}</ProfileName>

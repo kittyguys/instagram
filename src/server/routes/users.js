@@ -6,12 +6,24 @@ const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
 const storage = multer.diskStorage({
-  destination: "./public/images/avatars",
+  destination: `src/server/public/images/avatar`,
   filename: (req, file, cb) => {
     cb(null, file.originalname);
   }
 });
 const uploader = multer({ storage });
+
+// アバターのアップロード
+router.post('/avatar', uploader.single('avatar'), (req, res) => {
+  const file = req.file;
+  const _id = req.body._id;
+  console.log(file);
+  console.log(_id);
+  UserModel.findByIdAndUpdate(_id, { avater: file.path.replace("src/server/public/", "./") }, {new :true}, (err, user) => {
+    if(err) res.status(500).send()
+    else res.status(200).json({ user })
+  })
+})
 
 // login
 router.post("/login", function(req, res, next) {
