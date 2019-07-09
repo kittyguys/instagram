@@ -10,7 +10,10 @@ const profileReducer = (
       tel: null,
       sex: "",
       desc: "",
-      selected: "grid"
+      selected: "grid",
+      imageSrc: "",
+      imageFile: null,
+      modal: false
     },
     action
   ) => {
@@ -22,7 +25,7 @@ const profileReducer = (
           ...state,
           _id: action._id,
           id: action.id,
-          avatar: action.avater,
+          avater: action.avater,
           photos: action.photos,
           follow: action.follow,
           follower: action.follower,
@@ -37,6 +40,14 @@ const profileReducer = (
         return {
           ...state,
           selected: action.selected,
+        }
+      case "CHANGE_MODAL":
+        console.log(action)
+        return {
+          ...state,
+          imageSrc: action.imageSrc,
+          imageFile: action.imageFile,
+          modal: action.modal
         }
       default:
         return state;

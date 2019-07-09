@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import axios from "axios";
 import { withRouter } from "react-router";
 
 const ProfileEditMainWrapper = styled.div`
@@ -33,20 +34,41 @@ const ProfileAvaterEdit = styled.div`
 	cursor: pointer;
 `
 
+const AvatarImage = styled.img`
+	width: 100%;
+`
+
+const AvatarUpload = styled.input`
+	display: none;
+	cursor: pointer;
+`
+
+const AvatarUploadLabel = styled.label`
+	color: #1e90ff;	
+	font-size: 12px;
+`
+
 
 class ProfileEditMain extends React.Component {
+	handleChange(e) {
+		const file = e.target.files.item(0);
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = () => {
+			this.props.changeModal(reader.result, file, true)
+		}
+	}
     render() {
 		const { id, avater } = this.props;
         return (
             <ProfileEditMainWrapper>
                 <ProfileEditAvater>
-                    <img src="" alt=""/>
+                    <AvatarImage src={avater} alt=""/>
                 </ProfileEditAvater>
                 <ProfileNameBox>
                     <ProfileName>{id}</ProfileName>
-					<ProfileAvaterEdit onClick={() => this.props.history.push('/profileedit')}>
-						プロフィール写真を変更
-					</ProfileAvaterEdit>
+					<AvatarUploadLabel htmlFor="avatar">プロフィール写真を変更する</AvatarUploadLabel>
+					<AvatarUpload type="file" id="avatar" name="avatar" onChange={e => this.handleChange(e)} />
                 </ProfileNameBox>
             </ProfileEditMainWrapper>
     );
