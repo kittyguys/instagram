@@ -29,11 +29,10 @@ const UploadBtnIcon = styled.span`
 `;
 
 class UploadBtn extends React.Component {
-  getPhotoBlob(e) {}
   render() {
     return (
       <UploadBtnWrap>
-        <UploadBtnItem htmlFor="image">
+        <UploadBtnItem htmlFor="photo">
           <UploadBtnIcon>
             <Field
               name="blobUrl"
@@ -41,8 +40,11 @@ class UploadBtn extends React.Component {
                 return (
                   <>
                     <input
+                      id="photo"
                       type="file"
+                      hidden
                       onChange={e => {
+                        // こうしないと history.push が使えなかった
                         props.input.onChange(() => {
                           const createObjectURL =
                             (window.URL || window.webkitURL).createObjectURL ||
