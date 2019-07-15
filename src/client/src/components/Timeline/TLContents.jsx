@@ -96,7 +96,7 @@ const TLRead = styled.div`
   right: 10px;
 `;
 
-export default class ProfileContent extends React.Component {
+export default class TLContents extends React.Component {
   render() {
     return (
       <li>

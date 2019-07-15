@@ -3,6 +3,7 @@ import Timeline from "../components/Timeline";
 import { fetchTimelineStart } from "../actions/timeline";
 
 const mapStateToProps = state => ({
+  //uid: state.
   photoList: state.timeline.photoList
 });
 
