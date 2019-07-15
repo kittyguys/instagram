@@ -22,7 +22,7 @@ router.post("/upload", uploader.single("photo"), function(req, res, next) {
   new PhotoModel({
     uid: meta.uid,
     name: meta.name,
-    imagePath: file.path.replace("public/", ""),
+    imagePath: file.path.replace("src/server/public/", ""),
     date: file.lastModified,
     like: 0
   }).save(err => {
