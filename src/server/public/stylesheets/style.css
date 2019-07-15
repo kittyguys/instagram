@@ -144,10 +144,9 @@ a {
 #root {
   width: 320px;
   height: 568px;
+  margin: 0 auto;
   overflow-y: auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   background: #fafafa;
+  padding: 44px 0;
+  box-sizing: border-box;
 }

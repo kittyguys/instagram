@@ -15,12 +15,12 @@ const FooterWrap = styled.div`
 
   background-color: #fff;
   border: 0;
-  bottom: 0;
+  width: 320px;
   height: 44px;
-  left: 0;
   position: fixed;
-  right: 0;
-  top: auto;
+  left: 50%;
+  top: 574px;
+  transform: translate(-50%, 0);
   user-select: none;
   z-index: 10;
 `;
