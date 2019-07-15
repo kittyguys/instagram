@@ -6,8 +6,9 @@ export const fetchTimelineStart = () => ({
   type: FETCHTIMELINE_START
 });
 
-export const fetchTimelineSuccess = () => ({
-  type: FETCHTIMELINE_SUCCESS
+export const fetchTimelineSuccess = photoList => ({
+  type: FETCHTIMELINE_SUCCESS,
+  photoList
 });
 
 export const fetchTimelineFailed = () => ({

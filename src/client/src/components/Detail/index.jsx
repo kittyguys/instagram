@@ -290,6 +290,7 @@ class Detail extends React.Component {
 
     const formData = new FormData();
     formData.append("photo", fileObj);
+    formData.append("uid", this.props._id);
 
     Axios.post("/photos/upload", formData, {
       headers: { "content-type": "multipart/form-data" }

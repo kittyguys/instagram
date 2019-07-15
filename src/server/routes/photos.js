@@ -20,6 +20,7 @@ router.post("/upload", uploader.single("photo"), function(req, res, next) {
   console.log(file, meta);
   // DBに写真データを名前と一緒に保存
   new PhotoModel({
+    uid: meta.uid,
     name: meta.name,
     imagePath: file.path.replace("public/", ""),
     date: file.lastModified,

@@ -3,7 +3,7 @@ import Detail from "../components/Detail";
 
 const mapStateToProps = state => {
   return {
-    // _id: state.login._id
+    _id: state.login._id
   };
 };
 
