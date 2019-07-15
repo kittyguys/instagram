@@ -8,17 +8,25 @@ import FooterContainer from "../../containers/FooterContainer";
 import ProfileContent from "./ProfileContent";
 
 export default class Profile extends React.Component {
-	componentDidMount() {
-		this.props.fetchUserStart(this.props._id);
-	}
+  componentDidMount() {
+    this.props.fetchUserStart(this.props._id);
+  }
   render() {
+    console.log(this.props);
     return (
       <div>
         <ProfileHeader id={this.props.id} />
-					<ProfileMain id={this.props.id} avater={this.props.avater} />
-					<ProfileStatus photos={this.props.photos} follow={this.props.follow} follower={this.props.follower} />
-					<ProfileMenu selected={this.props.selected} changeMenu={this.props.changeMenu} />
-          <ProfileContent selected={this.props.selected} />
+        <ProfileMain id={this.props.id} avater={this.props.avater} />
+        <ProfileStatus
+          photos={this.props.photos}
+          follow={this.props.follow}
+          follower={this.props.follower}
+        />
+        <ProfileMenu
+          selected={this.props.selected}
+          changeMenu={this.props.changeMenu}
+        />
+        <ProfileContent selected={this.props.selected} {...this.props} />
         <FooterContainer />
       </div>
     );

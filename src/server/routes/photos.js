@@ -24,7 +24,7 @@ router.post("/upload", uploader.single("photo"), function(req, res, next) {
     name: meta.name,
     imagePath: file.path.replace("src/server/public/", ""),
     date: file.lastModified,
-    like: 0
+    like: []
   }).save(err => {
     if (err) {
       res.status(500);
@@ -36,10 +36,11 @@ router.post("/upload", uploader.single("photo"), function(req, res, next) {
   });
 });
 
-router.get("/", (req, res) => {
-  PhotoModel.find({}, (err, photoList) => {
+router.get("/me", (req, res) => {
+  const uid = req.query._id;
+  PhotoModel.find({ uid }, (err, photoList) => {
     if (err) res.status(500).send();
-    else res.status(200).send(photoList);
+    else res.status(200).json({ photoList });
   });
 });
 

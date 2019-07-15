@@ -5,7 +5,7 @@ import axios from "axios";
 const fetchUser = async _id => {
   try {
     const response = await axios.get(
-      `${process.env.API_PATH}/users/me?_id=${_id}`,
+      `${process.env.API_PATH}/users/me?_id=${_id}`
     );
     return response;
   } catch (err) {
@@ -13,11 +13,25 @@ const fetchUser = async _id => {
   }
 };
 
-function* runFetchUser({_id}) {
+const fetchUserPhoto = async _id => {
   try {
-    const response = yield call(fetchUser, _id);
-    const user = response.data.user;
-    yield put(fetchUserSuccess(user));
+    const response = await axios.get(
+      `${process.env.API_PATH}/photos/me?_id=${_id}`
+    );
+    return response;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+function* runFetchUser({ _id }) {
+  try {
+    const userResponse = yield call(fetchUser, _id);
+    const user = userResponse.data.user;
+    const photoResponse = yield call(fetchUserPhoto, _id);
+    const photoList = photoResponse.data.photoList;
+    console.log(photoList);
+    yield put(fetchUserSuccess({ user, photoList }));
   } catch (error) {
     yield put(fetchUserFailed(error));
   }

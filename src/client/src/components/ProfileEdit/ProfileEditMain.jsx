@@ -4,7 +4,7 @@ import axios from "axios";
 import { withRouter } from "react-router";
 
 const ProfileEditMainWrapper = styled.div`
-  padding-top: 54px;
+  padding-top: 24px;
   display: flex;
   align-items: center;
 `;

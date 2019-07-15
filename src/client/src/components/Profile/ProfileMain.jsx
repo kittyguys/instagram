@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { withRouter } from "react-router";
 
 const ProfileMainWrapper = styled.div`
-  padding-top: 70px;
+  padding-top: 24px;
   display: flex;
   align-items: center;
 `;

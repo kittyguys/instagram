@@ -9,18 +9,18 @@ export const fetchUserStart = _id => ({
   _id
 });
 
-export const fetchUserSuccess = ({_id, id, avater, photos, follow, follower, mail, tel, sex, desc}) => ({
+export const fetchUserSuccess = ({ user, photoList }) => ({
   type: FETCHUSER_SUCCESS,
-  _id,
-  id,
-  avater,
-  photos,
-  follow,
-  follower,
-  mail,
-  tel,
-  sex,
-  desc,
+  _id: user._id,
+  id: user.id,
+  avater: user.avater,
+  photos: photoList,
+  follow: user.follow,
+  follower: user.follower,
+  mail: user.mail,
+  tel: user.tel,
+  sex: user.sex,
+  desc: user.desc
 });
 
 export const fetchUserFailed = () => ({
@@ -30,4 +30,4 @@ export const fetchUserFailed = () => ({
 export const changeMenu = selected => ({
   type: CHANGE_MENU,
   selected
-})
+});
