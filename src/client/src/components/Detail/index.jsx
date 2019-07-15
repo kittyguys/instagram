@@ -287,7 +287,6 @@ class Detail extends React.Component {
     const fileType = blobObj.type.replace("image/", ".");
     const fileName = new Date().getTime() + fileType;
     const fileObj = await this.blobToFile(blobObj, fileName);
-    console.log(fileObj.lastModified);
 
     const formData = new FormData();
     formData.append("photo", fileObj);
