@@ -1,4 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
+import { followChange } from "../actions/otherProfile";
 import axios from "axios";
 
 const unfollow = async values => {
@@ -20,7 +21,9 @@ const unfollow = async values => {
 function* runUnfollow(values) {
   try {
     const response = yield call(unfollow, values);
-    console.log(response.data.user);
+    yield put(
+      followChange(response.data.user.follow, response.data.user.follower)
+    );
   } catch (error) {
     console.log(error);
   }

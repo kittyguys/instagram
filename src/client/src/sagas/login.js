@@ -21,7 +21,6 @@ const login = async values => {
 function* runLogin(values) {
   try {
     const response = yield call(login, values);
-    console.log(response)
     const { _id } = response.data.user;
     const token = response.data.token;
 

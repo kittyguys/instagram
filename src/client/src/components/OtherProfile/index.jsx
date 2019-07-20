@@ -12,7 +12,6 @@ export default class OtherProfile extends React.Component {
     this.props.fetchOtherUserStart(this.props.location.state._id);
   }
   render() {
-    console.log(this.props);
     return (
       <div>
         <OtherProfileHeader {...this.props} />

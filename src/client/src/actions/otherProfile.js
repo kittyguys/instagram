@@ -3,6 +3,7 @@ export const FETCHOTHERUSER_SUCCESS = "FETCHOTHERUSER_SUCCESS";
 export const FETCHOTHERUSER_FAILED = "FETCHOTHERUSER_FAILED";
 
 export const CHANGE_MENU_OTHER = "CHANGE_MENU_OTHER";
+export const FOLLOW_CHANGE = "FOLLOW_CHANGE";
 
 export const fetchOtherUserStart = _id => ({
   type: FETCHOTHERUSER_START,
@@ -30,4 +31,10 @@ export const fetchOtherUserFailed = () => ({
 export const changeMenuOther = selected => ({
   type: CHANGE_MENU_OTHER,
   selected
+});
+
+export const followChange = (follow, follower) => ({
+  type: FOLLOW_CHANGE,
+  follow,
+  follower
 });

@@ -38,6 +38,12 @@ const otherProfileReducer = (
         ...state,
         selected: action.selected
       };
+    case "FOLLOW_CHANGE":
+      return {
+        ...state,
+        follow: action.follow,
+        follower: action.follower
+      };
     default:
       return state;
   }

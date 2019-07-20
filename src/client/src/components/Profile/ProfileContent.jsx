@@ -18,7 +18,6 @@ const GridImage = styled.img`
 
 export default class ProfileContent extends React.Component {
   render() {
-    console.log(this.props);
     let contents;
     if (this.props.selected === "grid") {
       contents = (
@@ -34,6 +33,7 @@ export default class ProfileContent extends React.Component {
         <ul>
           {this.props.photos.map(photo => (
             <TLContents
+              key={photo._id}
               id={this.props.id}
               avater={this.props.avater}
               imagePath={photo.imagePath}
