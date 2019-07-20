@@ -1,3 +1,7 @@
+# Uploads
+src/server/public/images/avatar
+src/server/public/images/photos
+
 # Logs
 logs
 *.log
