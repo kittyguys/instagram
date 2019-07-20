@@ -36,6 +36,15 @@ router.post("/upload", uploader.single("photo"), function(req, res, next) {
   });
 });
 
+router.get("/", (req, res) => {
+  PhotoModel.find({}, (err, photoList) => {
+    if (err) res.status(500).send();
+    else {
+      res.status(200).json({ photoList });
+    }
+  });
+});
+
 router.get("/me", (req, res) => {
   const uid = req.query._id;
   PhotoModel.find({ uid }, (err, photoList) => {
@@ -46,11 +55,14 @@ router.get("/me", (req, res) => {
 
 router.put("/like", (req, res) => {
   const { id, uid } = req.body;
+  console.log(id, uid);
   let likeTmp = [];
   PhotoModel.findById(id, (err, photo) => {
     if (err) res.status(500).send();
     else {
-      likeTmp = photo.like.includes(uid) ? photo.like : photo.like.push(uid);
+      likeTmp = photo.like.includes(uid)
+        ? photo.like.filter(n => n !== uid)
+        : photo.like.push(uid);
       PhotoModel.findByIdAndUpdate(id, { like: likeTmp }, err => {
         if (err) res.status(500).send();
         else {

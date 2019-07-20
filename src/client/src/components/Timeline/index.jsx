@@ -7,12 +7,21 @@ export default class Timeline extends React.Component {
     this.props.fetchTimelineStart();
   }
   render() {
-    console.log(this.props.photoList[0]);
     return (
       <ul>
-        {this.props.photoList.map(photo => {
-          return <TLContents avater="" id="hoge" imagePath={photo.imagePath} />;
-        })}
+        {this.props.photoList.photoList &&
+          this.props.photoList.photoList.map(photo => {
+            return (
+              <TLContents
+                key={photo._id}
+                uid={this.props.uid}
+                _id={photo._id}
+                avater=""
+                id="hoge"
+                imagePath={photo.imagePath}
+              />
+            );
+          })}
       </ul>
     );
   }

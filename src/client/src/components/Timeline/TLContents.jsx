@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const TLHeader = styled.div`
   padding: 12px 14px;
@@ -97,6 +98,11 @@ const TLRead = styled.div`
 `;
 
 export default class TLContents extends React.Component {
+  async addLike(data) {
+    const res = await axios.put("/photos/like", data);
+    console.log(res);
+  }
+
   render() {
     return (
       <li>
@@ -109,7 +115,11 @@ export default class TLContents extends React.Component {
         </TLHeader>
         <TLPhoto src={this.props.imagePath}></TLPhoto>
         <TLFooter>
-          <TLFooterLike></TLFooterLike>
+          <TLFooterLike
+            onClick={() => {
+              this.addLike({ id: this.props._id, uid: this.props.uid });
+            }}
+          ></TLFooterLike>
           <TLFooterComment></TLFooterComment>
           <TLFooterMessage></TLFooterMessage>
           <TLFooterTag></TLFooterTag>
