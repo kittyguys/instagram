@@ -295,8 +295,8 @@ class Detail extends React.Component {
     Axios.post("/photos/upload", formData, {
       headers: { "content-type": "multipart/form-data" }
     })
-      .then(res => {
-        console.log(res);
+      .then(() => {
+        this.props.history.push("/");
       })
       .catch(error => {
         new Error(error);
