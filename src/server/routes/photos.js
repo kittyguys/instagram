@@ -3,6 +3,7 @@ const multer = require("multer");
 var router = express.Router();
 
 const PhotoModel = require("../db/models/photo");
+const UserModel = require("../db/models/user");
 
 const storage = multer.diskStorage({
   destination: "src/server/public/images/photos",
@@ -36,13 +37,44 @@ router.post("/upload", uploader.single("photo"), function(req, res, next) {
   });
 });
 
-router.get("/", (req, res) => {
-  PhotoModel.find({}, (err, photoList) => {
+// router.get("/", async (req, res) => {
+//   const uid = "5d0f4f3f7b45e34c6a3dc056";
+//   let json;
+
+//   await UserModel.findById(uid, (err, user) => {
+//     ["5d32a2fb72eef18c9090b5c5"].map(async id => {
+//       await PhotoModel.findById(id, (err, photos) => {
+//         json = { user, photos };
+//       });
+//     });
+//   });
+
+//   //user.following = ["5d32a2fb72eef18c9090b5c5"];
+
+//   console.log(json);
+
+//   res.status(200).json(json);
+// });
+
+router.get("/", async (req, res) => {
+  const uid = "5d0f4f3f7b45e34c6a3dc056";
+  let photoList = [];
+
+  await PhotoModel.find({ uid: uid }, (err, photos) => {
     if (err) res.status(500).send();
     else {
-      res.status(200).json({ photoList });
+      photos.map(photo => {
+        UserModel.findById(uid, (err, user) => {
+          if (err) res.status(500).send();
+          else {
+            const photoWithUser = { photo: photo, user: user };
+            photoList = [...photoList, photoWithUser];
+          }
+        });
+      });
     }
   });
+  res.status(200).json(photoList);
 });
 
 router.get("/me", (req, res) => {

@@ -6,7 +6,9 @@ export default class Timeline extends React.Component {
   componentDidMount() {
     this.props.fetchTimelineStart();
   }
+
   render() {
+    console.log(this.props.photoList);
     return (
       <ul>
         {this.props.photoList.photoList &&
@@ -16,8 +18,8 @@ export default class Timeline extends React.Component {
                 key={photo._id}
                 uid={this.props.uid}
                 _id={photo._id}
-                avater={this.props.avater}
-                id={this.props.id}
+                avater=""
+                id=""
                 imagePath={photo.imagePath}
               />
             );
