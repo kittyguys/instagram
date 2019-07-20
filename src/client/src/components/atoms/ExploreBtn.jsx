@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { withRouter } from "react-router";
 
 const ExploreBtnWrap = styled.div`
   webkit-box-flex: 1;
@@ -26,14 +27,16 @@ const ExploreBtnIcon = styled.span`
   width: 24px;
 `;
 
-export default class ExploreBtn extends React.Component {
+class ExploreBtn extends React.Component {
   render() {
     return (
       <ExploreBtnWrap>
         <ExploreBtnItem href="">
-          <ExploreBtnIcon />
+          <ExploreBtnIcon onClick={() => this.props.history.push("/explore")} />
         </ExploreBtnItem>
       </ExploreBtnWrap>
     );
   }
 }
+
+export default withRouter(ExploreBtn);

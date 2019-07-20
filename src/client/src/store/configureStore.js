@@ -2,19 +2,23 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import loginReducer from "../reducers/login";
 import profileReducer from "../reducers/profile";
 import timelineReducer from "../reducers/timeline";
+import exploreReducer from "../reducers/explore";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { reducer as formReducer } from "redux-form";
 
 import { rootSaga } from "../sagas/rootSaga";
 import createSagaMiddleware from "redux-saga";
+import otherProfileReducer from "../reducers/otherProfile";
 
 const sagaMiddleWare = createSagaMiddleware();
 
 const rootReducer = combineReducers({
   login: loginReducer,
   profile: profileReducer,
+  otherProfile: otherProfileReducer,
   timeline: timelineReducer,
+  explore: exploreReducer,
   form: formReducer
 });
 

@@ -14,16 +14,21 @@ const storage = multer.diskStorage({
 const uploader = multer({ storage });
 
 // アバターのアップロード
-router.post('/avatar', uploader.single('avatar'), (req, res) => {
+router.post("/avatar", uploader.single("avatar"), (req, res) => {
   const file = req.file;
   const _id = req.body._id;
   console.log(file);
   console.log(_id);
-  UserModel.findByIdAndUpdate(_id, { avater: file.path.replace("src/server/public/", "./") }, {new :true}, (err, user) => {
-    if(err) res.status(500).send()
-    else res.status(200).json({ user })
-  })
-})
+  UserModel.findByIdAndUpdate(
+    _id,
+    { avater: file.path.replace("src/server/public/", "/") },
+    { new: true },
+    (err, user) => {
+      if (err) res.status(500).send();
+      else res.status(200).json({ user });
+    }
+  );
+});
 
 // login
 router.post("/login", function(req, res, next) {
@@ -54,13 +59,25 @@ router.get("/me", function(req, res) {
   });
 });
 
+// 文字列で検索
+router.get("/explore", function(req, res) {
+  const searchText = req.query.searchText;
+  UserModel.find(
+    { id: new RegExp(".*" + searchText + ".*") },
+    (err, userList) => {
+      if (err) res.status(500);
+      else res.status(200).json({ userList });
+    }
+  );
+});
+
 // プロフィール編集
 router.post("/profileedit", function(req, res) {
-  console.log(req.body)
+  console.log(req.body);
   const { _id, values } = req.body;
   let userTmp = {};
   UserModel.findById(_id, (err, user) => {
-    if(err) res.status(500).send()
+    if (err) res.status(500).send();
     else {
       userTmp = user;
       values.id && (userTmp.id = values.id);
@@ -68,48 +85,53 @@ router.post("/profileedit", function(req, res) {
       values.sex && (userTmp.sex = values.sex);
       values.desc && (userTmp.desc = values.desc);
       values.tel && (userTmp.tel = values.tel);
-      console.log('userTmp', userTmp)
-      UserModel.findByIdAndUpdate(_id, { 
-        id: userTmp.id, 
-        sex: userTmp.sex, 
-        mail: userTmp.mail, 
-        tel: userTmp.tel, 
-        desc: userTmp.desc 
-      }, {new: true}, (err, user) => {
-        console.log(user)
-        if(err) res.status(500).send()
-        else res.status(200).json({ user });
-      })
+      console.log("userTmp", userTmp);
+      UserModel.findByIdAndUpdate(
+        _id,
+        {
+          id: userTmp.id,
+          sex: userTmp.sex,
+          mail: userTmp.mail,
+          tel: userTmp.tel,
+          desc: userTmp.desc
+        },
+        { new: true },
+        (err, user) => {
+          console.log(user);
+          if (err) res.status(500).send();
+          else res.status(200).json({ user });
+        }
+      );
     }
-  })
+  });
 });
 
 // follow
-router.put("/follow", (req, res) => {
-  const { uid, targetId } = req.body;
+router.post("/follow", (req, res) => {
+  const { _id, targetId } = req.body;
   let followTmp = [];
   let followerTmp = [];
-  UserModel.findById(uid, (err, user) => {
+  UserModel.findById(_id, (err, user) => {
     if (err) res.status(500).send();
     else {
       followTmp = user.follow.includes(targetId)
         ? user.follow
-        : user.follow.push(targetId);
-      UserModel.findByIdAndUpdate(uid, { follow: followTmp }, err => {
+        : [...user.follow, targetId];
+      UserModel.findByIdAndUpdate(_id, { follow: followTmp }, err => {
         if (err) res.status(500).send();
         else {
           UserModel.findById(targetId, (err, user) => {
             if (err) res.status(500).send();
             else {
-              followerTmp = user.follower.includes(uid)
+              followerTmp = user.follower.includes(_id)
                 ? user.follower
-                : user.follower.push(uid);
+                : [...user.follower, _id];
               UserModel.findByIdAndUpdate(
                 targetId,
                 { follower: followerTmp },
                 err => {
                   if (err) res.status(500).send();
-                  else res.status(200).json({ result: "OK" });
+                  else res.status(200).json({ user });
                 }
               );
             }
@@ -121,25 +143,25 @@ router.put("/follow", (req, res) => {
 });
 
 // unfollow
-router.put("/unfollow", (req, res) => {
-  const { uid, targetId } = req.body;
+router.post("/unfollow", (req, res) => {
+  const { _id, targetId } = req.body;
   let followTmp = [];
   let followerTmp = [];
-  UserModel.findById(uid, (err, user) => {
+  UserModel.findById(_id, (err, user) => {
     if (err) res.status(500).send();
     else {
       followTmp = user.follow.includes(targetId)
-        ? user.follow
-        : user.follow.splice(user.follow.indexOf(targetId), 1);
-      UserModel.findByIdAndUpdate(uid, { follow: followTmp }, err => {
+        ? user.follow.filter(item => item != targetId)
+        : user.follow;
+      UserModel.findByIdAndUpdate(_id, { follow: followTmp }, err => {
         if (err) res.status(500).send();
         else {
           UserModel.findById(targetId, (err, user) => {
             if (err) res.status(500).send();
             else {
-              followerTmp = user.follower.includes(uid)
-                ? user.follower
-                : user.follower.splice(user.follower.indexOf(uid), 1);
+              followerTmp = user.follower.includes(_id)
+                ? user.follower.filter(item => item != _id)
+                : user.follower;
               UserModel.findByIdAndUpdate(
                 targetId,
                 { follower: followerTmp },
@@ -190,7 +212,7 @@ router.post("/signup", function(req, res) {
         mail: "",
         tel: null,
         sex: "",
-        desc: "",
+        desc: ""
       }).save(err => {
         if (err) res.status(500).send();
         else {

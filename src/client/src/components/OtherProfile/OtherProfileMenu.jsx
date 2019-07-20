@@ -58,32 +58,32 @@ const ProfileMenuTag = styled.div`
   width: 24px;
 `;
 
-export default class ProfileMenu extends React.Component {
+export default class OtherProfileMenu extends React.Component {
   render() {
     return (
       <ProfileMenuWrapper>
         <ProfileMenuItem>
           <ProfileMenuGrid
             selected={this.props.selected}
-            onClick={() => this.props.changeMenu("grid")}
+            onClick={() => this.props.changeMenuOther("grid")}
           />
         </ProfileMenuItem>
         <ProfileMenuItem>
           <ProfileMenuTimeLine
             selected={this.props.selected}
-            onClick={() => this.props.changeMenu("tl")}
+            onClick={() => this.props.changeMenuOther("tl")}
           />
         </ProfileMenuItem>
         <ProfileMenuItem>
           <ProfileMenuSave
             selected={this.props.selected}
-            onClick={() => this.props.changeMenu("save")}
+            onClick={() => this.props.changeMenuOther("save")}
           />
         </ProfileMenuItem>
         <ProfileMenuItem>
           <ProfileMenuTag
             selected={this.props.selected}
-            onClick={() => this.props.changeMenu("tag")}
+            onClick={() => this.props.changeMenuOther("tag")}
           />
         </ProfileMenuItem>
       </ProfileMenuWrapper>
