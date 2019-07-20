@@ -2,18 +2,19 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { fetchTimelineSuccess, fetchTimelineFailed } from "../actions/timeline";
 import axios from "axios";
 
-const fetchTimeline = async () => {
+const fetchTimeline = async _id => {
   try {
-    const response = await axios.get(`${process.env.API_PATH}/photos/`);
+    const data = { myid: _id };
+    const response = await axios.post(`${process.env.API_PATH}/photos/`, data);
     return response;
   } catch (err) {
     throw new Error(err);
   }
 };
 
-function* runFetchTimeline() {
+function* runFetchTimeline({ _id }) {
   try {
-    const response = yield call(fetchTimeline);
+    const response = yield call(fetchTimeline, _id);
     const photoList = response.data;
     yield put(fetchTimelineSuccess(photoList));
   } catch (error) {

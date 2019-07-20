@@ -4,23 +4,23 @@ import TLContents from "./TLContents";
 
 export default class Timeline extends React.Component {
   componentDidMount() {
-    this.props.fetchTimelineStart();
+    this.props.fetchTimelineStart(this.props.uid);
   }
 
   render() {
     console.log(this.props.photoList);
     return (
       <ul>
-        {this.props.photoList.photoList &&
-          this.props.photoList.photoList.map(photo => {
+        {this.props.photoList &&
+          this.props.photoList.map(photo => {
             return (
               <TLContents
-                key={photo._id}
+                key={photo.photo._id}
                 uid={this.props.uid}
-                _id={photo._id}
-                avater=""
-                id=""
-                imagePath={photo.imagePath}
+                _id={photo.photo._id}
+                avater={photo.user.avater}
+                id={photo.user.id}
+                imagePath={photo.photo.imagePath}
               />
             );
           })}

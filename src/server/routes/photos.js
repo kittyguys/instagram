@@ -37,47 +37,34 @@ router.post("/upload", uploader.single("photo"), function(req, res, next) {
   });
 });
 
-// router.get("/", async (req, res) => {
-//   const uid = "5d0f4f3f7b45e34c6a3dc056";
-//   let json;
-
-//   await UserModel.findById(uid, (err, user) => {
-//     ["5d32a2fb72eef18c9090b5c5"].map(async id => {
-//       await PhotoModel.findById(id, (err, photos) => {
-//         json = { user, photos };
-//       });
-//     });
-//   });
-
-//   //user.following = ["5d32a2fb72eef18c9090b5c5"];
-
-//   console.log(json);
-
-//   res.status(200).json(json);
-// });
-
-router.get("/", async (req, res) => {
-  const uid = "5d0f4f3f7b45e34c6a3dc056";
+router.post("/", async (req, res) => {
+  const uid = req.body.myid;
+  let followingUid = [];
   let photoList = [];
 
-  PhotoModel.find({ uid: uid }, (err, photos) => {
-    if (err) res.status(500).send();
-    else {
-      for (let i = 0; i < photos.length; i++) {
-        UserModel.findById(uid, (err, user) => {
-          if (err) res.status(500).send();
-          else {
-            const photoWithUser = { photo: photos[i], user: user };
-            photoList = [...photoList, photoWithUser];
-            if (i === photos.length - 1) {
-              console.log(photoList);
-              res.status(200).json(photoList);
-            }
-          }
-        });
-      }
-    }
+  await UserModel.findById(uid, (err, user) => {
+    followingUid = user.follow;
   });
+
+  for (let i = 0; i < followingUid.length; i++) {
+    PhotoModel.find({ uid: followingUid[i] }, (err, photos) => {
+      if (err) res.status(500).send();
+      else {
+        for (let j = 0; j < photos.length; j++) {
+          UserModel.findById(followingUid[i], (err, user) => {
+            if (err) res.status(500).send();
+            else {
+              const photoWithUser = { photo: photos[j], user: user };
+              photoList = [...photoList, photoWithUser];
+              if (i === followingUid.length - 1 && j === photos.length - 1) {
+                res.status(200).json(photoList);
+              }
+            }
+          });
+        }
+      }
+    });
+  }
 });
 
 router.get("/me", (req, res) => {

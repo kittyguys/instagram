@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchTimelineStart: () => dispatch(fetchTimelineStart())
+  fetchTimelineStart: _id => dispatch(fetchTimelineStart(_id))
 });
 
 export default connect(
