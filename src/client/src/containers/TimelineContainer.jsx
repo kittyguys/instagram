@@ -4,6 +4,7 @@ import { fetchTimelineStart } from "../actions/timeline";
 
 const mapStateToProps = state => ({
   uid: state.login._id,
+  id: state.login.id,
   photoList: state.timeline.photoList
 });
 

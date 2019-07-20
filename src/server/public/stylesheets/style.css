@@ -129,12 +129,10 @@ table {
 }
 
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   min-height: 100vh;
   box-sizing: border-box;
   margin: 0;
-  background: #000;
 }
 
 a {
@@ -142,8 +140,6 @@ a {
 }
 
 #root {
-  width: 320px;
-  height: 568px;
   margin: 0 auto;
   overflow-y: auto;
   background: #fafafa;

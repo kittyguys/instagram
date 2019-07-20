@@ -18,12 +18,10 @@ const HeaderWrap = styled.div`
   flex-wrap: wrap;
   font-size: 16px;
   font-weight: 600;
-  width: 320px;
+  width: 100%;
   position: fixed;
-  left: 50%;
-  top: 50px;
-  transform: translate(-50%, 0);
-  z-index: 1;
+  left: 0;
+  top: 0;
   flex-direction: column;
 `;
 

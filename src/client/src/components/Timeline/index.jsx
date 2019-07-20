@@ -11,13 +11,14 @@ export default class Timeline extends React.Component {
       <ul>
         {this.props.photoList.photoList &&
           this.props.photoList.photoList.map(photo => {
+            console.log();
             return (
               <TLContents
                 key={photo._id}
                 uid={this.props.uid}
                 _id={photo._id}
-                avater=""
-                id="hoge"
+                avater={this.props.avater}
+                id={this.props.id}
                 imagePath={photo.imagePath}
               />
             );

@@ -30,7 +30,7 @@ export default class HomeBtn extends React.Component {
   render() {
     return (
       <HomeBtnWrap>
-        <HomeBtnItem href="">
+        <HomeBtnItem href="/">
           <HomeBtnIcon />
         </HomeBtnItem>
       </HomeBtnWrap>
