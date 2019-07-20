@@ -18,6 +18,7 @@ const TLAvatar = styled.div`
   align-items: center;
   justify-content: center;
   margin-right: 10px;
+  overflow: hidden;
 `;
 
 const TLName = styled.div`
