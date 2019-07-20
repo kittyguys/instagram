@@ -60,21 +60,24 @@ router.get("/", async (req, res) => {
   const uid = "5d0f4f3f7b45e34c6a3dc056";
   let photoList = [];
 
-  await PhotoModel.find({ uid: uid }, (err, photos) => {
+  PhotoModel.find({ uid: uid }, (err, photos) => {
     if (err) res.status(500).send();
     else {
-      photos.map(photo => {
+      for (let i = 0; i < photos.length; i++) {
         UserModel.findById(uid, (err, user) => {
           if (err) res.status(500).send();
           else {
-            const photoWithUser = { photo: photo, user: user };
+            const photoWithUser = { photo: photos[i], user: user };
             photoList = [...photoList, photoWithUser];
+            if (i === photos.length - 1) {
+              console.log(photoList);
+              res.status(200).json(photoList);
+            }
           }
         });
-      });
+      }
     }
   });
-  res.status(200).json(photoList);
 });
 
 router.get("/me", (req, res) => {
