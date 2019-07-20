@@ -21,8 +21,8 @@ const SearchInput = styled.input`
 `;
 
 export default class ExploreInput extends React.Component {
-  handleChange(text) {
-    this.props.exploreStart(text);
+  handleChange(searchText) {
+    this.props.exploreStart(searchText, this.props._id);
   }
   render() {
     return (

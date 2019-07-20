@@ -62,11 +62,15 @@ router.get("/me", function(req, res) {
 // 文字列で検索
 router.get("/explore", function(req, res) {
   const searchText = req.query.searchText;
+  const _id = req.query._id;
   UserModel.find(
     { id: new RegExp(".*" + searchText + ".*") },
     (err, userList) => {
       if (err) res.status(500);
-      else res.status(200).json({ userList });
+      else {
+        const filteredUserList = userList.filter(user => user._id != _id);
+        res.status(200).json({ userList: filteredUserList });
+      }
     }
   );
 });

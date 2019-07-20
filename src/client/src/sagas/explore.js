@@ -3,10 +3,11 @@ import { exploreSuccess, exploreFailed } from "../actions/explore";
 import axios from "axios";
 
 const explore = async values => {
-  const searchText = values.text;
+  const searchText = values.searchText;
+  const _id = values._id;
   try {
     const response = await axios.get(
-      `${process.env.API_PATH}/users/explore?searchText=${searchText}`
+      `${process.env.API_PATH}/users/explore?searchText=${searchText}&_id=${_id}`
     );
     return response;
   } catch (err) {
