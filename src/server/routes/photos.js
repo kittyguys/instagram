@@ -53,16 +53,15 @@ router.get("/me", (req, res) => {
   });
 });
 
-router.put("/like", (req, res) => {
+router.post("/like", (req, res) => {
   const { id, uid } = req.body;
-  console.log(id, uid);
   let likeTmp = [];
   PhotoModel.findById(id, (err, photo) => {
     if (err) res.status(500).send();
     else {
       likeTmp = photo.like.includes(uid)
         ? photo.like.filter(n => n !== uid)
-        : photo.like.push(uid);
+        : [...photo.like, uid]; // pushは使えなかった
       PhotoModel.findByIdAndUpdate(id, { like: likeTmp }, err => {
         if (err) res.status(500).send();
         else {

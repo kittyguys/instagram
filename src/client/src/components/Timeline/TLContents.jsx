@@ -99,8 +99,7 @@ const TLRead = styled.div`
 
 export default class TLContents extends React.Component {
   async addLike(data) {
-    const res = await axios.put("/photos/like", data);
-    console.log(res);
+    const res = await axios.post("/photos/like", data);
   }
 
   render() {
