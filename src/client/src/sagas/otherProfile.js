@@ -33,8 +33,6 @@ function* runFetchOtherUser({ _id }) {
     const user = userResponse.data.user;
     const photoResponse = yield call(fetchOtherUserPhoto, _id);
     const photoList = photoResponse.data.photoList;
-    console.log(user);
-    console.log(photoList);
     yield put(fetchOtherUserSuccess({ user, photoList }));
   } catch (error) {
     yield put(fetchOtherUserFailed(error));

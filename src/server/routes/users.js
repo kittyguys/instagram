@@ -129,7 +129,8 @@ router.post("/follow", (req, res) => {
               UserModel.findByIdAndUpdate(
                 targetId,
                 { follower: followerTmp },
-                err => {
+                { new: true },
+                (err, user) => {
                   if (err) res.status(500).send();
                   else res.status(200).json({ user });
                 }
@@ -165,9 +166,10 @@ router.post("/unfollow", (req, res) => {
               UserModel.findByIdAndUpdate(
                 targetId,
                 { follower: followerTmp },
-                err => {
+                { new: true },
+                (err, user) => {
                   if (err) res.status(500).send();
-                  else res.status(200).json({ result: "OK" });
+                  else res.status(200).json({ user });
                 }
               );
             }

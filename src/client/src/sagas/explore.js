@@ -17,7 +17,6 @@ const explore = async values => {
 function* runExplore(values) {
   try {
     const response = yield call(explore, values);
-    console.log(response);
     const { userList } = response.data;
     yield put(exploreSuccess(userList));
   } catch (error) {

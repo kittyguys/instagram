@@ -12,7 +12,6 @@ export default class Profile extends React.Component {
     this.props.fetchUserStart(this.props._id);
   }
   render() {
-    console.log(this.props);
     return (
       <div>
         <ProfileHeader id={this.props.id} />
