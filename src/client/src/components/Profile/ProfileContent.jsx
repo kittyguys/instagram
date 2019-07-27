@@ -37,6 +37,7 @@ export default class ProfileContent extends React.Component {
               id={this.props.id}
               avater={this.props.avater}
               imagePath={photo.imagePath}
+              like={photo.like}
             />
           ))}
         </ul>

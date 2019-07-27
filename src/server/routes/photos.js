@@ -43,6 +43,7 @@ router.post("/", async (req, res) => {
   let photoList = [];
 
   await UserModel.findById(uid, (err, user) => {
+    if (err) return;
     followingUid = user.follow;
   });
 
