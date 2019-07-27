@@ -21,17 +21,21 @@ const HomeBtnIcon = styled.span`
   background-image: url(/images/icons2.png);
   background-repeat: no-repeat;
   background-size: 337px 298px;
-  background-position: -263px -150px;
+  background-position: -263px -175px;
   height: 24px;
   width: 24px;
+
+  &.is-current {
+    background-position: -263px -150px;
+  }
 `;
 
 export default class HomeBtn extends React.Component {
   render() {
     return (
       <HomeBtnWrap>
-        <HomeBtnItem href="/">
-          <HomeBtnIcon />
+        <HomeBtnItem href={this.props.link}>
+          <HomeBtnIcon className={this.props.current ? "is-current" : ""} />
         </HomeBtnItem>
       </HomeBtnWrap>
     );

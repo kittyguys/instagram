@@ -17,11 +17,14 @@ export default class FooterInner extends React.Component {
   render() {
     return (
       <FooterItem>
-        <HomeBtn />
+        <HomeBtn link="/" current={location.pathname === "/"} />
         <ExploreBtn />
         <UploadBtn />
-        <ActivityBtn />
-        <ProfileBtn />
+        <ActivityBtn link="" current={location.pathname === ""} />
+        <ProfileBtn
+          link="/profile"
+          current={location.pathname === "/profile"}
+        />
       </FooterItem>
     );
   }

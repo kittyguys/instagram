@@ -21,17 +21,21 @@ const ActivityBtnIcon = styled.span`
   background-image: url(/images/icons2.png);
   background-repeat: no-repeat;
   background-size: 337px 298px;
-  background-position: -263px -125px;
+  background-position: -263px -124px;
   height: 24px;
   width: 24px;
+
+  &.is-current {
+    background-position: -263px -74px;
+  }
 `;
 
 export default class ActivityBtn extends React.Component {
   render() {
     return (
       <ActivityBtnWrap>
-        <ActivityBtnItem href="">
-          <ActivityBtnIcon />
+        <ActivityBtnItem href={this.props.link}>
+          <ActivityBtnIcon className={this.props.current ? "is-current" : ""} />
         </ActivityBtnItem>
       </ActivityBtnWrap>
     );
