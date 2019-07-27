@@ -11,9 +11,16 @@ const GridWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-const GridImage = styled.img`
+const ImageWrapper = styled.div`
   width: 32%;
   margin: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const GridImage = styled.img`
+  width: 100%;
 `;
 
 export default class ProfileContent extends React.Component {
@@ -23,7 +30,9 @@ export default class ProfileContent extends React.Component {
       contents = (
         <GridWrapper>
           {this.props.photos.map(photo => (
-            <GridImage key={photo._id} src={photo.imagePath}></GridImage>
+            <ImageWrapper>
+              <GridImage key={photo._id} src={photo.imagePath}></GridImage>
+            </ImageWrapper>
           ))}
         </GridWrapper>
       );
