@@ -1,0 +1,18 @@
+version: "3"
+services:
+  webserver:
+    build: node
+    image: node-express-dev:1.0
+    container_name: node
+    tty: true
+    volumes:
+      - ./node/instagram:/instagram
+    ports:
+      - "80:3000"
+    links:
+      - mongo
+  mongo:
+    container_name: mongodb
+    image: mongo
+    ports:
+      - "27017:27017"
