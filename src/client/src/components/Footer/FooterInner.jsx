@@ -18,7 +18,10 @@ export default class FooterInner extends React.Component {
     return (
       <FooterItem>
         <HomeBtn link="/" current={location.pathname === "/"} />
-        <ExploreBtn />
+        <ExploreBtn
+          link="/explore"
+          current={location.pathname === "/explore"}
+        />
         <UploadBtn />
         <ActivityBtn link="" current={location.pathname === ""} />
         <ProfileBtn
