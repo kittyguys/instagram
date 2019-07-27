@@ -25,14 +25,18 @@ const ExploreBtnIcon = styled.span`
   background-position: -150px -274px;
   height: 24px;
   width: 24px;
+
+  &.is-current {
+    background-position: -125px -274px;
+  }
 `;
 
 class ExploreBtn extends React.Component {
   render() {
     return (
       <ExploreBtnWrap>
-        <ExploreBtnItem href="">
-          <ExploreBtnIcon onClick={() => this.props.history.push("/explore")} />
+        <ExploreBtnItem href={this.props.link}>
+          <ExploreBtnIcon className={this.props.current ? "is-current" : ""} />
         </ExploreBtnItem>
       </ExploreBtnWrap>
     );
