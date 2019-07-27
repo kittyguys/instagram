@@ -14,6 +14,7 @@ export default class OtherProfile extends React.Component {
   render() {
     return (
       <div>
+        a
         <OtherProfileHeader {...this.props} />
         <OtherProfileMain {...this.props} />
         <OtherProfileStatus {...this.props} />
