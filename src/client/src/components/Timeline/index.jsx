@@ -8,7 +8,6 @@ export default class Timeline extends React.Component {
   }
 
   render() {
-    console.log(this.props.photoList);
     return (
       <ul>
         {this.props.photoList &&
@@ -21,6 +20,7 @@ export default class Timeline extends React.Component {
                 avater={photo.user.avater}
                 id={photo.user.id}
                 imagePath={photo.photo.imagePath}
+                like={photo.photo.like}
               />
             );
           })}

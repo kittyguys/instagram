@@ -87,10 +87,7 @@ router.post("/like", (req, res) => {
       PhotoModel.findByIdAndUpdate(id, { like: likeTmp }, err => {
         if (err) res.status(500).send();
         else {
-          PhotoModel.find({}, (findErr, photoList) => {
-            if (findErr) res.status(500).send();
-            else res.status(200).send(photoList);
-          });
+          res.status(200).send(likeTmp);
         }
       });
     }

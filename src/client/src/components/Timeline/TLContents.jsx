@@ -51,6 +51,10 @@ const TLFooterLike = styled.div`
   height: 24px;
   width: 24px;
   margin-right: 10px;
+
+  &.is-like {
+    background-position: -263px -99px;
+  }
 `;
 
 const TLFooterComment = styled.div`
@@ -99,8 +103,28 @@ const TLRead = styled.div`
 `;
 
 export default class TLContents extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLike: false
+    };
+  }
+
+  switchLike(likeArr) {
+    if (likeArr.includes(this.props.uid)) {
+      this.setState({ isLike: true });
+    } else {
+      this.setState({ isLike: false });
+    }
+  }
+
+  componentDidMount() {
+    this.switchLike(this.props.like);
+  }
+
   async addLike(data) {
     const res = await axios.post("/photos/like", data);
+    this.switchLike(res.data);
   }
 
   render() {
@@ -116,6 +140,7 @@ export default class TLContents extends React.Component {
         <TLPhoto src={this.props.imagePath}></TLPhoto>
         <TLFooter>
           <TLFooterLike
+            className={this.state.isLike ? "is-like" : ""}
             onClick={() => {
               this.addLike({ id: this.props._id, uid: this.props.uid });
             }}
