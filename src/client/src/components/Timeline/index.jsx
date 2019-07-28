@@ -27,7 +27,6 @@ export default class Timeline extends React.Component {
                   id={photo.user.id}
                   imagePath={photo.photo.imagePath}
                   like={photo.photo.like}
-                  date={photo.photo.date}
                 />
               );
             })}
