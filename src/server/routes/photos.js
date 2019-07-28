@@ -17,14 +17,12 @@ const uploader = multer({ storage });
 router.post("/upload", uploader.single("photo"), function(req, res, next) {
   const file = req.file;
   const meta = req.body;
-  // デッバグのため、アップしたファイルの名前を表示する
-  console.log(file, meta);
   // DBに写真データを名前と一緒に保存
   new PhotoModel({
     uid: meta.uid,
     name: meta.name,
     imagePath: file.path.replace("src/server/public/", "/"),
-    date: file.lastModified,
+    date: Date.now(),
     like: []
   }).save(err => {
     if (err) {
@@ -43,7 +41,6 @@ router.post("/", async (req, res) => {
   let photoList = [];
 
   await UserModel.findById(uid, (err, user) => {
-    console.log(err, user);
     if (err) return;
     followingUid = user.follow;
   });

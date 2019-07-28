@@ -11,19 +11,26 @@ export default class Timeline extends React.Component {
     return (
       <ul>
         {this.props.photoList &&
-          this.props.photoList.map(photo => {
-            return (
-              <TLContents
-                key={photo.photo._id}
-                uid={this.props.uid}
-                _id={photo.photo._id}
-                avater={photo.user.avater}
-                id={photo.user.id}
-                imagePath={photo.photo.imagePath}
-                like={photo.photo.like}
-              />
-            );
-          })}
+          this.props.photoList
+            .sort(function(a, b) {
+              if (a.photo.date > b.photo.date) return -1;
+              if (a.photo.date < b.photo.date) return 1;
+              return 0;
+            })
+            .map(photo => {
+              return (
+                <TLContents
+                  key={photo.photo._id}
+                  uid={this.props.uid}
+                  _id={photo.photo._id}
+                  avater={photo.user.avater}
+                  id={photo.user.id}
+                  imagePath={photo.photo.imagePath}
+                  like={photo.photo.like}
+                  date={photo.photo.date}
+                />
+              );
+            })}
       </ul>
     );
   }
