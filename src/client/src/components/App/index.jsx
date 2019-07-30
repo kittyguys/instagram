@@ -8,6 +8,7 @@ import Profile from "../../containers/ProfileContainer";
 import ProfileEdit from "../../containers/ProfileEditContainer";
 import Explore from "../../containers/ExploreContainer";
 import OtherProfile from "../../containers/OtherProfileContainer";
+import Activity from "../../containers/ActivityContainer";
 
 const App = () => (
   <Router>
@@ -16,6 +17,7 @@ const App = () => (
     <Route path="/create/details" component={Detail} />
     <PrivateRoute path="/profile" component={Profile} />
     <PrivateRoute path="/profileedit" component={ProfileEdit} />
+    <PrivateRoute path="/activity" component={Activity} />
     <PrivateRoute exact path="/explore" component={Explore} />
     <Route path="/explore/profile" component={OtherProfile} />
   </Router>

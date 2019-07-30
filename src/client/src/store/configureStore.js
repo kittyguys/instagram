@@ -10,6 +10,7 @@ import { reducer as formReducer } from "redux-form";
 import { rootSaga } from "../sagas/rootSaga";
 import createSagaMiddleware from "redux-saga";
 import otherProfileReducer from "../reducers/otherProfile";
+import likeTimelineReducer from "../reducers/likeTimeline";
 
 const sagaMiddleWare = createSagaMiddleware();
 
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   profile: profileReducer,
   otherProfile: otherProfileReducer,
   timeline: timelineReducer,
+  likeTimeline: likeTimelineReducer,
   explore: exploreReducer,
   form: formReducer
 });

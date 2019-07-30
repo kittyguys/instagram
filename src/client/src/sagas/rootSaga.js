@@ -8,6 +8,7 @@ import { watchFetchTimeline } from "./timeline";
 import { watchExplore } from "./explore";
 import { watchFollow } from "./follow";
 import { watchUnfollow } from "./unfollow";
+import { watchFetchLikeTimeline } from "./likeTimeline";
 
 export function* rootSaga() {
   yield fork(watchLogin);
@@ -16,6 +17,7 @@ export function* rootSaga() {
   yield fork(watchFetchOtherUser);
   yield fork(watchProfileEdit);
   yield fork(watchFetchTimeline);
+  yield fork(watchFetchLikeTimeline);
   yield fork(watchExplore);
   yield fork(watchFollow);
   yield fork(watchUnfollow);

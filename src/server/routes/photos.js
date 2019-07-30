@@ -66,6 +66,41 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.post("/mylike", async (req, res) => {
+  const uid = req.body.myid;
+  let followingUid = [];
+  let photoList = [];
+
+  await UserModel.findById(uid, (err, user) => {
+    if (err) return;
+    followingUid = user.follow;
+  });
+
+  for (let i = 0; i < followingUid.length; i++) {
+    PhotoModel.find({ uid: followingUid[i] }, (err, photos) => {
+      if (err) res.status(500).send();
+      else {
+        for (let j = 0; j < photos.length; j++) {
+          UserModel.findById(followingUid[i], (err, user) => {
+            if (err) res.status(500).send();
+            else {
+              if(photos[j].like.includes(uid)){
+                const photoWithUser = { photo: photos[j], user: user };
+                photoList = [...photoList, photoWithUser];
+              } else {
+                photoList = [...photoList];
+              }
+              if (i === followingUid.length - 1 && j === photos.length - 1) {
+                res.status(200).json(photoList);
+              }
+            }
+          });
+        }
+      }
+    });
+  }
+});
+
 router.get("/me", (req, res) => {
   const uid = req.query._id;
   PhotoModel.find({ uid }, (err, photoList) => {
