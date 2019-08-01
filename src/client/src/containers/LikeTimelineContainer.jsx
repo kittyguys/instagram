@@ -5,7 +5,8 @@ import { fetchLikeTimelineStart } from "../actions/likeTimeline";
 const mapStateToProps = state => ({
   uid: state.login._id,
   id: state.login.id,
-  photoList: state.likeTimeline.photoList
+  photoList: state.likeTimeline.photoList,
+  isLoading: state.likeTimeline.isLoading
 });
 
 const mapDispatchToProps = dispatch => ({

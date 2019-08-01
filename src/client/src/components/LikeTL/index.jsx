@@ -2,6 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import TLContents from "../Timeline/TLContents";
 
+const LoadingWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 60px;
+`;
 export default class LikeTimeline extends React.Component {
   componentDidMount() {
     this.props.fetchLikeTimelineStart(this.props.uid);
@@ -10,7 +15,12 @@ export default class LikeTimeline extends React.Component {
   render() {
     return (
       <ul>
-        {this.props.photoList &&
+        {this.props.isLoading === true ? (
+          <LoadingWrap>
+            <img src="./images/icon_loader_f_ww_01_s1.gif" alt="loading" />
+          </LoadingWrap>
+        ) : (
+          this.props.photoList &&
           this.props.photoList
             .sort(function(a, b) {
               if (a.date > b.date) return -1;
@@ -29,7 +39,8 @@ export default class LikeTimeline extends React.Component {
                   like={photo.like}
                 />
               );
-            })}
+            })
+        )}
       </ul>
     );
   }

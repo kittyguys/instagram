@@ -1,9 +1,12 @@
-const likeTimelineReducer = (state = { photoList: [] }, action) => {
+const likeTimelineReducer = (state = { photoList: [], isLoading: true }, action) => {
     switch (action.type) {
       case "FETCHLIKETIMELINE_START":
-        return state;
+        return {
+          ...state,
+          isLoading: true
+        };
       case "FETCHLIKETIMELINE_SUCCESS":
-        return { ...state, photoList: action.photoList };
+        return { ...state, photoList: action.photoList, isLoading: false };
       case "FETCHLIKETIMELINE_FAILED":
         return state;
       default:

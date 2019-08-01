@@ -1,9 +1,15 @@
-const timelineReducer = (state = { photoList: [] }, action) => {
+const timelineReducer = (
+  state = { photoList: [], isLoading: false },
+  action
+) => {
   switch (action.type) {
     case "FETCHTIMELINE_START":
-      return state;
+      return {
+        ...state,
+        isLoading: true
+      };
     case "FETCHTIMELINE_SUCCESS":
-      return { ...state, photoList: action.photoList };
+      return { ...state, photoList: action.photoList, isLoading: false };
     case "FETCHTIMELINE_FAILED":
       return state;
     default:

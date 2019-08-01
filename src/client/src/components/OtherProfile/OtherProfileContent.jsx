@@ -47,15 +47,21 @@ export default class ProfileContent extends React.Component {
     if (this.props.selected === "tl") {
       contents = (
         <ul>
-          {this.props.photos.map(photo => (
-            <TLContents
-              key={photo._id}
-              id={this.props.id}
-              avater={this.props.avater}
-              imagePath={photo.imagePath}
-              like={photo.like}
-            />
-          ))}
+          {this.props.photos
+            .sort(function(a, b) {
+              if (a.date > b.date) return -1;
+              if (a.date < b.date) return 1;
+              return 0;
+            })
+            .map(photo => (
+              <TLContents
+                key={photo._id}
+                id={this.props.id}
+                avater={this.props.avater}
+                imagePath={photo.imagePath}
+                like={photo.like}
+              />
+            ))}
         </ul>
       );
     }

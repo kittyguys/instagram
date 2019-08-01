@@ -50,7 +50,6 @@ function* runFetchLikeTimeline({ _id }) {
       }
       fixedPhotoList = [...fixedPhotoList, fixedPhoto];
     }
-    console.log(fixedPhotoList);
     fixedPhotoList = fixedPhotoList.filter(fixedPhoto => fixedPhoto.like.includes(_id))
     yield put(fetchLikeTimelineSuccess(fixedPhotoList));
   } catch (error) {
