@@ -13,20 +13,20 @@ export default class LikeTimeline extends React.Component {
         {this.props.photoList &&
           this.props.photoList
             .sort(function(a, b) {
-              if (a.photo.date > b.photo.date) return -1;
-              if (a.photo.date < b.photo.date) return 1;
+              if (a.date > b.date) return -1;
+              if (a.date < b.date) return 1;
               return 0;
             })
             .map(photo => {
               return (
                 <TLContents
-                  key={photo.photo._id}
+                  key={photo._id}
                   uid={this.props.uid}
-                  _id={photo.photo._id}
-                  avater={photo.user.avater}
-                  id={photo.user.id}
-                  imagePath={photo.photo.imagePath}
-                  like={photo.photo.like}
+                  _id={photo._id}
+                  avater={photo.avatar}
+                  id={photo.id}
+                  imagePath={photo.imagePath}
+                  like={photo.like}
                 />
               );
             })}

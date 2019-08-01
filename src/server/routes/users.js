@@ -53,6 +53,7 @@ router.post("/login", function(req, res, next) {
 // idでfind
 router.get("/me", function(req, res) {
   const _id = req.query._id;
+  console.log(_id)
   UserModel.findById(_id, (err, user) => {
     if (err) res.status(500);
     else res.status(200).json({ user });

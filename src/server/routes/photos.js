@@ -35,35 +35,23 @@ router.post("/upload", uploader.single("photo"), function(req, res, next) {
   });
 });
 
-router.post("/", async (req, res) => {
-  const uid = req.body.myid;
-  let followingUid = [];
-  let photoList = [];
+// tl fix
+router.post("/followingUsersPhoto", async (req, res) => {
+  const _id = req.body._id;
+  PhotoModel.find({uid: _id}, (err, photoList) => {
+    if(err) res.status(500);
+    else res.status(200).json({ photoList });
+  })
+});
 
-  await UserModel.findById(uid, (err, user) => {
-    if (err) return;
-    followingUid = user.follow;
-  });
+// tl fix
+router.post("/followingUsers", async (req, res) => {
+  const _id = req.body.myid;
 
-  for (let i = 0; i < followingUid.length; i++) {
-    PhotoModel.find({ uid: followingUid[i] }, (err, photos) => {
-      if (err) res.status(500).send();
-      else {
-        for (let j = 0; j < photos.length; j++) {
-          UserModel.findById(followingUid[i], (err, user) => {
-            if (err) res.status(500).send();
-            else {
-              const photoWithUser = { photo: photos[j], user: user };
-              photoList = [...photoList, photoWithUser];
-              if (i === followingUid.length - 1 && j === photos.length - 1) {
-                res.status(200).json(photoList);
-              }
-            }
-          });
-        }
-      }
-    });
-  }
+  UserModel.findById(_id, (err, user) => {
+    if(err) res.status(500)
+    res.status(200).json({ followingUsers: user.follow });
+  })
 });
 
 router.post("/mylike", async (req, res) => {
