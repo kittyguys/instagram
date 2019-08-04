@@ -19,6 +19,7 @@ app.use(logger("dev"));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/photos", photosRouter);
 app.use("/users", usersRouter);
