@@ -1,5 +1,5 @@
 var express = require("express");
-var bodyparser = require('body-parser');
+var bodyparser = require("body-parser");
 var multer = require("multer");
 var path = require("path");
 var cookieParser = require("cookie-parser");
@@ -17,9 +17,8 @@ app.use(logger("dev"));
 // app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
 app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({extended: true}));
+app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/photos", photosRouter);
 app.use("/users", usersRouter);
