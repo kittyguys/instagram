@@ -7,7 +7,6 @@ const TLHeader = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  z-index: -10;
 `;
 
 const TLAvatar = styled.div`
@@ -41,7 +40,6 @@ const TLFooter = styled.div`
   display: flex;
   padding: 10px;
   position: relative;
-  z-index: -10;
 `;
 
 const TLFooterLike = styled.div`

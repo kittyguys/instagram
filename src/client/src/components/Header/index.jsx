@@ -23,6 +23,7 @@ const HeaderWrap = styled.div`
   left: 0;
   top: 0;
   flex-direction: column;
+  z-index: 10;
 `;
 
 export default class Header extends React.Component {
