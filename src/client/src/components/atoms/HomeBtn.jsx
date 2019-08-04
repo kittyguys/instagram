@@ -8,7 +8,7 @@ const HomeBtnWrap = styled.div`
   justify-content: center;
 `;
 
-const HomeBtnItem = styled.a`
+const HomeBtnItem = styled.span`
   justify-content: center;
   align-items: center;
   display: flex;
@@ -34,7 +34,7 @@ export default class HomeBtn extends React.Component {
   render() {
     return (
       <HomeBtnWrap>
-        <HomeBtnItem href={this.props.link}>
+        <HomeBtnItem>
           <HomeBtnIcon className={this.props.current ? "is-current" : ""} />
         </HomeBtnItem>
       </HomeBtnWrap>

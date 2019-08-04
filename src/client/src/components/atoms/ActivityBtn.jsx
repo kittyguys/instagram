@@ -8,7 +8,7 @@ const ActivityBtnWrap = styled.div`
   justify-content: center;
 `;
 
-const ActivityBtnItem = styled.a`
+const ActivityBtnItem = styled.span`
   justify-content: center;
   align-items: center;
   display: flex;
@@ -34,7 +34,7 @@ export default class ActivityBtn extends React.Component {
   render() {
     return (
       <ActivityBtnWrap>
-        <ActivityBtnItem href={this.props.link}>
+        <ActivityBtnItem>
           <ActivityBtnIcon className={this.props.current ? "is-current" : ""} />
         </ActivityBtnItem>
       </ActivityBtnWrap>

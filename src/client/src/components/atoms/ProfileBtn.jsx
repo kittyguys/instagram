@@ -9,7 +9,7 @@ const ProfileBtnWrap = styled.div`
   justify-content: center;
 `;
 
-const ProfileBtnItem = styled.a`
+const ProfileBtnItem = styled.span`
   justify-content: center;
   align-items: center;
   display: flex;
@@ -35,7 +35,7 @@ class ProfileBtn extends React.Component {
   render() {
     return (
       <ProfileBtnWrap>
-        <ProfileBtnItem href={this.props.link}>
+        <ProfileBtnItem>
           <ProfileBtnIcon className={this.props.current ? "is-current" : ""} />
         </ProfileBtnItem>
       </ProfileBtnWrap>

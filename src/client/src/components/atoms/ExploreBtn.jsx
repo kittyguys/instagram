@@ -9,7 +9,7 @@ const ExploreBtnWrap = styled.div`
   justify-content: center;
 `;
 
-const ExploreBtnItem = styled.a`
+const ExploreBtnItem = styled.span`
   justify-content: center;
   align-items: center;
   display: flex;
@@ -35,7 +35,7 @@ class ExploreBtn extends React.Component {
   render() {
     return (
       <ExploreBtnWrap>
-        <ExploreBtnItem href={this.props.link}>
+        <ExploreBtnItem>
           <ExploreBtnIcon className={this.props.current ? "is-current" : ""} />
         </ExploreBtnItem>
       </ExploreBtnWrap>
