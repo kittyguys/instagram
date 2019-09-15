@@ -73146,7 +73146,7 @@ function (_React$Component) {
         avatar: this.props.imageSrc,
         _id: this.props._id
       };
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat("http://localhost:3000", "/users/avatar"), param).then(function (result) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat("https://murmuring-scrubland-68188.herokuapp.com", "/users/avatar"), param).then(function (result) {
         console.log(result.data.user);
 
         _this.props.changeModal("", "", false);
