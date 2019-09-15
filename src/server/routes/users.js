@@ -14,14 +14,14 @@ const storage = multer.diskStorage({
 const uploader = multer({ storage });
 
 // アバターのアップロード
-router.post("/avatar", uploader.single("avatar"), (req, res) => {
-  const file = req.file;
+router.post("/avatar", (req, res) => {
+  const avatar = req.body.avatar;
   const _id = req.body._id;
-  console.log(file);
+  console.log(avatar);
   console.log(_id);
   UserModel.findByIdAndUpdate(
     _id,
-    { avater: file.path.replace("src/server/public/", "/") },
+    { avater: avatar },
     { new: true },
     (err, user) => {
       if (err) res.status(500).send();
@@ -53,7 +53,7 @@ router.post("/login", function(req, res, next) {
 // idでfind
 router.get("/me", function(req, res) {
   const _id = req.query._id;
-  console.log(_id)
+  console.log(_id);
   UserModel.findById(_id, (err, user) => {
     if (err) res.status(500);
     else res.status(200).json({ user });

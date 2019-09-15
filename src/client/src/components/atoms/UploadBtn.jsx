@@ -50,12 +50,16 @@ class UploadBtn extends React.Component {
                             (window.URL || window.webkitURL).createObjectURL ||
                             window.createObjectURL;
                           const files = e.target.files[0];
-                          const blobUrl = createObjectURL(files);
-                          this.props.history.push({
-                            pathname: "/create/details",
-                            state: { blobUrl }
-                          });
-                          return blobUrl;
+                          const reader = new FileReader();
+                          reader.onload = e => {
+                            const base64Photo = e.target.result;
+                            const blobUrl = createObjectURL(files);
+                            this.props.history.push({
+                              pathname: "/create/details",
+                              state: { blobUrl, base64Photo }
+                            });
+                          };
+                          reader.readAsDataURL(files);
                         });
                       }}
                     />

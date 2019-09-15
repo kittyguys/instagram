@@ -14,14 +14,15 @@ const storage = multer.diskStorage({
 const uploader = multer({ storage });
 
 /* GET users listing. */
-router.post("/upload", uploader.single("photo"), function(req, res, next) {
-  const file = req.file;
-  const meta = req.body;
+router.post("/upload", function(req, res, next) {
+  const base64 = req.body.photo;
+  const uid = req.body.uid;
+  console.log(base64);
+  console.log(uid);
   // DBに写真データを名前と一緒に保存
   new PhotoModel({
-    uid: meta.uid,
-    name: meta.name,
-    imagePath: file.path.replace("src/server/public/", "/"),
+    uid: uid,
+    imagePath: base64,
     date: Date.now(),
     like: []
   }).save(err => {
@@ -30,7 +31,7 @@ router.post("/upload", uploader.single("photo"), function(req, res, next) {
     }
     // アップ完了したら200ステータスを送る
     else {
-      res.status(200).json({ file, meta, msg: "image uploaded" });
+      res.status(200).json({ msg: "image uploaded" });
     }
   });
 });
@@ -38,10 +39,10 @@ router.post("/upload", uploader.single("photo"), function(req, res, next) {
 // tl fix
 router.post("/followingUsersPhoto", async (req, res) => {
   const _id = req.body._id;
-  PhotoModel.find({uid: _id}, (err, photoList) => {
-    if(err) res.status(500);
+  PhotoModel.find({ uid: _id }, (err, photoList) => {
+    if (err) res.status(500);
     else res.status(200).json({ photoList });
-  })
+  });
 });
 
 // tl fix
@@ -49,9 +50,9 @@ router.post("/followingUsers", async (req, res) => {
   const _id = req.body.myid;
 
   UserModel.findById(_id, (err, user) => {
-    if(err) res.status(500)
+    if (err) res.status(500);
     res.status(200).json({ followingUsers: user.follow });
-  })
+  });
 });
 
 router.post("/mylike", async (req, res) => {
@@ -72,7 +73,7 @@ router.post("/mylike", async (req, res) => {
           UserModel.findById(followingUid[i], (err, user) => {
             if (err) res.status(500).send();
             else {
-              if(photos[j].like.includes(uid)){
+              if (photos[j].like.includes(uid)) {
                 const photoWithUser = { photo: photos[j], user: user };
                 photoList = [...photoList, photoWithUser];
               } else {

@@ -283,19 +283,23 @@ class Detail extends React.Component {
   }
 
   async uploadDetail() {
-    const blobObj = await this.getBlobObj();
-    const fileType = blobObj.type.replace("image/", ".");
-    const fileName = new Date().getTime() + fileType;
-    const fileObj = await this.blobToFile(blobObj, fileName);
+    // const blobObj = await this.getBlobObj();
+    // const fileType = blobObj.type.replace("image/", ".");
+    // const fileName = new Date().getTime() + fileType;
+    // const fileObj = await this.blobToFile(blobObj, fileName);
 
-    const formData = new FormData();
-    formData.append("photo", fileObj);
-    formData.append("uid", this.props._id);
+    // const formData = new FormData();
+    // formData.append("photo", this.props.history.location.state.blobUrl);
+    // formData.append("uid", this.props._id);
 
-    Axios.post("/photos/upload", formData, {
-      headers: { "content-type": "multipart/form-data" }
-    })
-      .then(() => {
+    const data = {
+      photo: this.props.history.location.state.base64Photo,
+      uid: this.props._id
+    };
+
+    Axios.post("/photos/upload", data)
+      .then(res => {
+        console.log(res.data.msg);
         this.props.history.push("/");
       })
       .catch(error => {

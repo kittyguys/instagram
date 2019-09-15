@@ -58,6 +58,7 @@ function* runFetchTimeline({ _id }) {
         avatar: response.data.user.avater
       };
       fixedPhotoList = [...fixedPhotoList, fixedPhoto];
+      console.log(fixedPhotoList);
     }
     yield put(fetchTimelineSuccess(fixedPhotoList));
   } catch (error) {
