@@ -75861,7 +75861,7 @@ const explore = async values => {
   const _id = values._id;
   try {
     const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(
-      `${"http://localhost:3000"}/users/explore?searchText=${searchText}&_id=${_id}`
+      `${"https://murmuring-scrubland-68188.herokuapp.com"}/users/explore?searchText=${searchText}&_id=${_id}`
     );
     return response;
   } catch (err) {
@@ -75911,7 +75911,7 @@ const follow = async values => {
   };
   try {
     const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(
-      `${"http://localhost:3000"}/users/follow`,
+      `${"https://murmuring-scrubland-68188.herokuapp.com"}/users/follow`,
       data
     );
     return response;
@@ -75959,7 +75959,7 @@ __webpack_require__.r(__webpack_exports__);
 const fetchFollowingUsers = async _id => {
   try {
     const data = { myid: _id };
-    const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(`${"http://localhost:3000"}/photos/followingUsers`, data);
+    const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(`${"https://murmuring-scrubland-68188.herokuapp.com"}/photos/followingUsers`, data);
     return response;
   } catch (err) {
     throw new Error(err);
@@ -75969,7 +75969,7 @@ const fetchFollowingUsers = async _id => {
 const fetchPhotoList = async followingUserId => {
   try {
     const data = { _id: followingUserId };
-    const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(`${"http://localhost:3000"}/photos/followingUsersPhoto`, data);
+    const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(`${"https://murmuring-scrubland-68188.herokuapp.com"}/photos/followingUsersPhoto`, data);
     return response;
   } catch (err) {
     throw new Error(err);
@@ -75978,7 +75978,7 @@ const fetchPhotoList = async followingUserId => {
 
 const fetchUserData = async userId => {
   try {
-    const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(`${"http://localhost:3000"}/users/me?_id=${userId}`);
+    const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(`${"https://murmuring-scrubland-68188.herokuapp.com"}/users/me?_id=${userId}`);
     return response;
   } catch (err) {
     throw new Error(err);
@@ -76043,7 +76043,7 @@ const login = async values => {
   };
   try {
     const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(
-      `${"http://localhost:3000"}/users/login`,
+      `${"https://murmuring-scrubland-68188.herokuapp.com"}/users/login`,
       data
     );
     return response;
@@ -76093,7 +76093,7 @@ __webpack_require__.r(__webpack_exports__);
 const fetchOtherUser = async _id => {
   try {
     const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(
-      `${"http://localhost:3000"}/users/me?_id=${_id}`
+      `${"https://murmuring-scrubland-68188.herokuapp.com"}/users/me?_id=${_id}`
     );
     return response;
   } catch (err) {
@@ -76104,7 +76104,7 @@ const fetchOtherUser = async _id => {
 const fetchOtherUserPhoto = async _id => {
   try {
     const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(
-      `${"http://localhost:3000"}/photos/me?_id=${_id}`
+      `${"https://murmuring-scrubland-68188.herokuapp.com"}/photos/me?_id=${_id}`
     );
     return response;
   } catch (err) {
@@ -76152,7 +76152,7 @@ __webpack_require__.r(__webpack_exports__);
 const fetchUser = async _id => {
   try {
     const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(
-      `${"http://localhost:3000"}/users/me?_id=${_id}`
+      `${"https://murmuring-scrubland-68188.herokuapp.com"}/users/me?_id=${_id}`
     );
     return response;
   } catch (err) {
@@ -76163,7 +76163,7 @@ const fetchUser = async _id => {
 const fetchUserPhoto = async _id => {
   try {
     const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(
-      `${"http://localhost:3000"}/photos/me?_id=${_id}`
+      `${"https://murmuring-scrubland-68188.herokuapp.com"}/photos/me?_id=${_id}`
     );
     return response;
   } catch (err) {
@@ -76210,7 +76210,7 @@ __webpack_require__.r(__webpack_exports__);
 const profileEdit = async values => {
   try {
     const response = await axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(
-      `${"http://localhost:3000"}/users/profileedit`,
+      `${"https://murmuring-scrubland-68188.herokuapp.com"}/users/profileedit`,
       values
     );
     return response;
@@ -76311,7 +76311,7 @@ const signUp = async values => {
   };
   try {
     const response = await axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(
-      `${"http://localhost:3000"}/users/signup`,
+      `${"https://murmuring-scrubland-68188.herokuapp.com"}/users/signup`,
       data
     );
     return response;
@@ -76361,7 +76361,7 @@ const fetchFollowingUsers = async _id => {
   try {
     const data = { myid: _id };
     const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(
-      `${"http://localhost:3000"}/photos/followingUsers`,
+      `${"https://murmuring-scrubland-68188.herokuapp.com"}/photos/followingUsers`,
       data
     );
     return response;
@@ -76374,7 +76374,7 @@ const fetchPhotoList = async followingUserId => {
   try {
     const data = { _id: followingUserId };
     const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(
-      `${"http://localhost:3000"}/photos/followingUsersPhoto`,
+      `${"https://murmuring-scrubland-68188.herokuapp.com"}/photos/followingUsersPhoto`,
       data
     );
     return response;
@@ -76386,7 +76386,7 @@ const fetchPhotoList = async followingUserId => {
 const fetchUserData = async userId => {
   try {
     const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(
-      `${"http://localhost:3000"}/users/me?_id=${userId}`
+      `${"https://murmuring-scrubland-68188.herokuapp.com"}/users/me?_id=${userId}`
     );
     return response;
   } catch (err) {
@@ -76453,7 +76453,7 @@ const unfollow = async values => {
   };
   try {
     const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(
-      `${"http://localhost:3000"}/users/unfollow`,
+      `${"https://murmuring-scrubland-68188.herokuapp.com"}/users/unfollow`,
       data
     );
     return response;
