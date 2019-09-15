@@ -1,16 +1,17 @@
 let mongoose = require("mongoose");
 
-const server = "mongo:27017";
+const server = "localhost:27017";
 const database = "instagram";
 
 class Database {
   connect() {
     mongoose
-      .connect(`mongodb://${server}/${database}`)
+      .connect(`mongodb://${server}/${database}`, { useNewUrlParser: true })
       .then(() => {
         console.log("Database connection successful");
       })
       .catch(err => {
+        console.log(err);
         console.error("Database connection error");
       });
   }
